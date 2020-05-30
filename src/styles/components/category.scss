@@ -1,0 +1,18 @@
+.category {
+  position: relative;
+  @each $name, $color in $gradients {
+    &_#{$name} {
+      &::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: $color;
+      }
+    }
+  }
+}

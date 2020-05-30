@@ -1,0 +1,70 @@
+.icon-input {
+    display: flex;
+    .input {
+        padding-right: 0;
+    }
+    & > *:not(:last-child) {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &__button {
+        cursor: pointer;
+        position: relative;
+        width: 48px;
+        height: 48px;
+        border: 1px solid $choco-30;
+        border-radius: 0 8px 8px 0;
+        border-left: none;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        fill: $choco-30;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.input {
+    font-size: 16px;
+    padding: 0 16px;
+    height: 48px;
+    border: 1px solid $choco-30;
+    border-radius: 8px;
+    color: $choco-90;
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+        color: $choco-20;
+    }
+
+    &:focus,
+    &:active {
+        border-color: $choco-60;
+
+        & ~ .icon-input__button {
+            border-color: $choco-60;
+
+            & .icon-input__icon {
+                fill: $choco-60;
+            }
+        }
+    }
+}
+
+.promo-input {
+    .input {
+        height: 102px;
+        padding: 0 24px;
+        border-radius: 16px;
+        font-size: 56px;
+        line-height: 140%;
+        font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on, 'ss02' on;
+    }
+}

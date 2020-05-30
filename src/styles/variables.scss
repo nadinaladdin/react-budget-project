@@ -1,0 +1,109 @@
+//COLORS SCHEME
+$choco-10: #F5F1F0;
+$choco-20: #DBD4D2;
+$choco-30: #C2B8B6;
+$choco-40: #A89E9B;
+$choco-50: #8F8481;
+$choco-60: #756A67;
+$choco-70: #5C524F;
+$choco-80: #423A37;
+$choco-90: #292322;
+
+$fire-10: #FF8161;
+$fire-20: #F57758;
+$fire-30: #DB684B;
+
+$red-10: #FF6161;
+$red-20: #F55858;
+$red-30: #DB4B4B;
+$green: #25B38D;
+
+$choco-50-opacity-30: #dddad9;
+
+//GRADIENTS
+
+$red-gradient: linear-gradient(166.03deg, #F54663 0%, #FFBAAC 100%);
+$violet-gradient: linear-gradient(166.03deg, #A751B8 0%, #FE98AA 100%);
+$orange-gradient: linear-gradient(166.03deg, #F57859 0%, #FFCF98 100%);
+$yellow-gradient: linear-gradient(166.03deg, #E9BB17 0%, #FFEEB3 100%);
+$blue-gradient: linear-gradient(166.03deg, #5C77FF 0%, #98CEFF 100%);
+$green-gradient: linear-gradient(166.03deg, #22A380 0%, #A9E0AA 100%);
+$gray-gradient: linear-gradient(166.03deg, #7B7B7B 0%, #B7B7B7 100%);
+
+$gradients: () !default;
+$gradients: map-merge((
+  "red": $red-gradient,
+  "violet": $violet-gradient,
+  "orange": $orange-gradient,
+  "yellow": $yellow-gradient,
+  "blue": $blue-gradient,
+  "green": $green-gradient,
+  "gray": $gray-gradient
+), $gradients);
+
+//COLORS
+
+$primary-text-color: $choco-90;
+$hint-text-color: $choco-50;
+$danger-text-color: $red-30;
+
+//BUTTON COLORS
+$primary-button-text-color: white;
+
+$primary-button-color: $fire-20;
+$primary-hover-button-color: $fire-10;
+$primary-pressed-button-color: $fire-30;
+
+$primary-danger-button-color: $red-20;
+$primary-danger-hover-button-color: $red-10;
+$primary-danger-pressed-button-color: $red-30;
+
+$secondary-button-text-color: $fire-30;
+$secondary-hover-button-text-color: $fire-20;
+
+$secondary-button-color: $choco-10;
+$secondary-pressed-button-color: $choco-20;
+
+$outline-button-text-color: $fire-30;
+$outline-hover-button-text-color: $fire-30;
+$outline-pressed-button-color: $choco-10;
+$outline-danger-button-text-color: $red-30;
+$outline-danger-hover-button-text-color: $red-30;
+
+$disabled-button-color: $choco-10;
+$disabled-button-text-color: $choco-40;
+
+
+
+$input-color: $choco-30;
+$input-focus-color: $choco-60;
+
+// MESSAGE STATES
+
+$message-states: () !default;
+$message-states: map_merge((
+  "danger": $red-20,
+  "success": $green
+), $message-states);
+
+
+//TYPOGRAPHY
+
+$font-xl: 56px;
+$font-xl-promo: 56px;
+$font-l: 32px;
+$font-m: 24px;
+$font-s: 16px;
+$font-s-medium: 16px;
+$font-xs: 12px;
+$font-xs-medium: 12px;
+
+// BREAKPOINTS
+
+$screen-md-min: 784px;
+$screen-lg-min: 944px;
+$screen-xl-min: 1320px;
+
+//SHADOWS
+
+$primary-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.04), 0px 2px 2px rgba(0, 0, 0, 0.04), 0px 4px 4px rgba(0, 0, 0, 0.04), 0px 8px 8px rgba(0, 0, 0, 0.04), 0px 16px 16px rgba(0, 0, 0, 0.04), 0px 32px 32px rgba(0, 0, 0, 0.04), 0px 0px 32px rgba(0, 0, 0, 0.08);

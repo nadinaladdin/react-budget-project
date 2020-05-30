@@ -1,0 +1,54 @@
+.overflow-menu {
+  position: relative;
+  width: min-content;
+
+  &__wrapper {
+    position: absolute;
+    transform: translateX(calc(-50% + 12px));
+    z-index: 3;
+  }
+
+  &:hover {
+    .overflow-menu__list {
+      display: block;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    width: min-content;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    fill: $choco-50;
+  }
+
+  &__list {
+    display: none;
+    list-style: none;
+    left: 50%;
+    margin-top: 8px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: $primary-box-shadow;
+    padding: 8px 0;
+  }
+
+  &__list-item {
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &_danger {
+      color: $red-30;
+    }
+
+    &:hover {
+      background: $choco-10;
+    }
+  }
+}

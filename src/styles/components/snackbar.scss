@@ -1,0 +1,109 @@
+.snackbar {
+  //position: fixed;
+  //right: 24px;
+  //top: 24px;
+  box-shadow: $primary-box-shadow;
+  background-color: $choco-80;
+  width: 256px;
+  border-radius: 8px;
+  display: flex;
+
+  //animation-duration: 1.5s;
+  //animation-delay: 0s, 5s;
+  //animation-name: fade-in, fade-out;
+
+  & > * {
+    &:not(:last-child) {
+      margin: 12px 0 12px 12px;
+    }
+  }
+
+  &__message-state {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    @each $message-state, $color in $message-states {
+      &_#{$message-state} {
+        background: $color;
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    stroke: white;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__text {
+    font-size: $font-xs;
+    color: white;
+    line-height: 140%;
+    align-self: center;
+  }
+
+  &__link {
+    &,
+    &:link,
+    &:visited {
+      font-size: 12px;
+      cursor: pointer;
+      color: $fire-20;
+      display: block;
+      margin-top: 4px;
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:active {
+      color: $fire-30;
+    }
+}
+
+  &__close-button {
+    flex-shrink: 0;
+    position: relative;
+    margin-left: auto;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__close-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    stroke: $choco-40;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,100 @@
+.dropdown {
+  &__wrapper {
+    position: relative;
+    z-index: 3;
+    ::-webkit-scrollbar {
+      //set absolute position
+      width: 12px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border: 5px solid rgba(0, 0, 0, 0);
+      background-clip: padding-box;
+      -webkit-border-radius: 8px;
+      background-color: $choco-50-opacity-30;
+
+      &:hover {
+        background-color: $choco-50;
+      }
+    }
+
+    ::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    ::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+  }
+
+  &__header {
+    padding-left: 36px;
+    height: 48px;
+    width: 100%;
+    border: 1px solid $choco-30;
+    border-radius: 8px;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__header-title {
+    align-self: center;
+  }
+
+  &__header-button {
+    cursor: pointer;
+    position: relative;
+    width: 48px;
+    height: 48px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    stroke: $choco-30;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &_open {
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+  }
+
+  &__list {
+    position: absolute;
+    width: 100%;
+    margin-top: 8px;
+    max-height: 0px;
+    overflow-y: scroll;
+    box-shadow: $primary-box-shadow;
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    transition: max-height 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &_open {
+      max-height: 230px;
+    }
+  }
+
+  &__list-item {
+    position: relative;
+    cursor: pointer;
+    padding-left: 36px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: $choco-10;
+    }
+
+    &_active {
+      color: $choco-50;
+    }
+  }
+}

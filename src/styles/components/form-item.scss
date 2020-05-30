@@ -1,0 +1,22 @@
+.form-item {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+        font-size: 16px;
+        line-height: 150%;
+        color: $choco-90;
+        margin-bottom: 8px;
+    }
+
+    &__message {
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 140%;
+        color: $choco-50;
+
+        &_error {
+            color: #DB4B4B;
+        }
+    }
+}

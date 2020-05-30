@@ -1,0 +1,193 @@
+.button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all .3s;
+    transform-style: preserve-3d;
+
+    &_small {
+        height: 33px;
+        font-size: $font-xs;
+        border-radius: 8px;
+        padding: 0 12px;
+        line-height: 140%;
+    }
+
+    &_medium {
+        height: 48px;
+        font-size: $font-s;
+        border-radius: 12px;
+        padding: 0 16px;
+        line-height: 150%;
+    }
+
+    &_large {
+        height: 66px;
+        font-size: $font-m;
+        border-radius: 16px;
+        padding: 0 30px;
+        line-height: 140%;
+    }
+
+    &_primary {
+        background: $primary-button-color;
+        color: $primary-button-text-color;
+
+
+
+        &:hover {
+            background: $primary-hover-button-color;
+        }
+
+        &:active {
+            background: $primary-pressed-button-color;
+            transform: scale(0.95);
+        }
+
+        &_danger {
+            background: $primary-danger-button-color;
+            
+        &:hover {
+            background: $primary-danger-hover-button-color;
+        }
+
+        &:active {
+            background: $primary-danger-pressed-button-color;
+        }
+    }
+    }
+
+    &_secondary {
+        background: $secondary-button-color;
+        color: $secondary-button-text-color;
+
+        &:hover {
+            color: $secondary-hover-button-text-color;
+        }
+
+        &:active {
+            background: $secondary-pressed-button-color;
+            transform: scale(0.95);
+        }
+    }
+
+    &_outline {
+        background: transparent;
+        color: $outline-button-text-color;
+        border: $outline-button-text-color 1px solid;
+
+        &_danger {
+           color: $outline-danger-button-text-color;
+           border: $outline-danger-button-text-color 1px solid;
+
+            &:hover {
+                color: $outline-danger-hover-button-text-color;
+                border: $outline-danger-hover-button-text-color 1px solid;
+            }
+        }
+
+        &:hover {
+            color: $outline-hover-button-text-color;
+            border: $outline-hover-button-text-color 1px solid;
+        }
+
+        &:active {
+            background: $outline-pressed-button-color;
+            transform: scale(0.95);
+        }
+    }
+
+    &_disabled {
+        cursor: default;
+        pointer-events: none;
+        border: none;
+        background: $disabled-button-color;
+        color: $disabled-button-text-color;
+    }
+}
+
+.floating-button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all .3s;
+    background: $choco-80;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: $primary-box-shadow;
+
+    &:hover {
+        background: $choco-70;
+    }
+
+    &:active {
+        background: $choco-90;
+        transform: scale(0.95);
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        stroke: white;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.tabs {
+    background: $choco-10;
+    border-radius: 24px;
+    display: flex;
+    height: 48px;
+    padding: 4px;
+}
+
+.tab {
+    position: relative;
+    cursor: pointer;
+    &__checked {
+
+    }
+    &__button {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        position: absolute;
+
+        &:checked ~ .tab__label {
+            background: $choco-90;
+            color: white;
+        }
+    }
+
+    &__label {
+        padding: 8px 24px;
+        border-radius: 24px;
+        display: block;
+
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 150%;
+    }
+
+    &:not(:first-child) {
+        &:before {
+            position: absolute;
+            content: "";
+            background: $choco-90;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            top: 50%;
+            left: 0px;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

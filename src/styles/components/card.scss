@@ -1,0 +1,27 @@
+.card {
+  width: 100%;
+  border-radius: 12px;
+  background: white;
+  padding: 24px;
+
+   &__header {
+     color: $choco-50;
+   }
+
+  &__form {
+    display: flex;
+    margin: 24px 0;
+    & > * {
+      &:not(:last-child) {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  &__body {
+    border-top: solid 1px $choco-10;
+    &_empty-state {
+      padding: 0 58px 24px;
+    }
+  }
+}

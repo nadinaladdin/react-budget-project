@@ -1,0 +1,156 @@
+.datepicker {
+  &__wrapper {
+    z-index: 3;
+    position: relative;
+  }
+
+  &__container {
+    display: none;
+    background: white;
+    box-shadow: $primary-box-shadow;
+    border-radius: 8px;
+    top: 56px;
+    left: 0;
+    position: absolute;
+
+    &_open {
+      display: block;
+    }
+  }
+
+  &__calendar-menu {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  &__calendar-label {
+    margin-left: 22px;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 150%;
+    color: $choco-40;
+  }
+
+  &__calendar-controls {
+    margin-left: auto;
+    display: flex;
+  }
+
+  &__calendar-control {
+    width: 52px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__icon {
+    stroke: $choco-30;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+
+    &:hover {
+      stroke: $choco-50;
+    }
+
+    &_back {
+      transform: rotate(90deg);
+      left: 20px;
+    }
+
+    &_forward {
+      transform: rotate(-90deg);
+      left: 8px;
+    }
+  }
+
+  &__week {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 24px;
+    border-bottom: solid 1px $choco-10;
+  }
+
+  &__weekday {
+    font-size: 12px;
+    line-height: 140%;
+    color: $choco-30;
+    padding-bottom: 12px;
+  }
+
+  &__calendar {
+    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: (5, 1fr);
+  }
+
+  &__day {
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    vertical-align: middle;
+    line-height: 40px;
+    text-align: center;
+    z-index: 0;
+
+    &:hover {
+      color: $choco-60;
+    }
+
+    &_pale {
+      color: $choco-20;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &_selected {
+      color: white;
+      cursor: default;
+      pointer-events: none;
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 50%;
+        background: $fire-20;
+      }
+    }
+  }
+
+  &__bottom-menu {
+    height: 52px;
+    display: flex;
+  }
+
+  &__shortcut {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    padding-top: 11px;
+    color: $fire-30;
+
+    &:first-child {
+      padding-left: 24px;
+      text-align: left;
+    }
+
+    &:last-child {
+      padding-right: 24px;
+      text-align: right;
+    }
+
+    &_disabled {
+      cursor: default;
+      pointer-events: none;
+      color: $choco-30;
+    }
+  }
+}

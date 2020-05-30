@@ -1,0 +1,20 @@
+.table {
+  padding: 8px 0;
+  width: 100%;
+
+  &__cell {
+    padding: 8px 0;
+    &_text {
+      color: $choco-90;
+    }
+    &_number {
+      text-align: right;
+      color: $choco-50;
+    }
+    &_button {
+      & > div {
+        margin-left: auto;
+      }
+    }
+  }
+}

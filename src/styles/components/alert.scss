@@ -1,0 +1,17 @@
+.empty-alert {
+  text-align: center;
+
+  &__icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  &__header {
+    color: $choco-90;
+  }
+
+  &__text {
+    color: $choco-50;
+  }
+
+}

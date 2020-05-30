@@ -1,0 +1,42 @@
+.story {
+  padding: 64px;
+  .story__title {
+    margin-bottom: 48px;
+  }
+
+  .story__subtitle {
+    padding: 12px;
+    width: 75%;
+    background-color: $choco-10;
+    border-radius: 8px;
+  }
+}
+
+.component-container {
+  padding-top: 24px;
+   &__row {
+     display: flex;
+     flex: 0;
+     flex-wrap: wrap;
+      & > * {
+        margin-bottom: 24px;
+        &:not(:last-child) {
+          margin-right: 12px;
+        }
+      }
+   }
+}
+
+.color-scheme {
+  &__title {
+
+  }
+}
+
+.width-30 {
+  width: 30%;
+}
+
+.width-50 {
+  width: 50%;
+}

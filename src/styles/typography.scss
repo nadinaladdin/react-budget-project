@@ -1,0 +1,58 @@
+@import url('https://rsms.me/inter/inter.css');
+html { 
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+@supports (font-variation-settings: normal) {
+  html { 
+      font-family: 'Inter var', sans-serif; 
+    }
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+.primary-header {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 140%;
+    font-size: $font-xl;
+}
+
+.primary-header-promo {
+    font-style: normal;
+    font-weight: normal;
+    font-size: $font-xl-promo;
+    line-height: 140%;
+    font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on, 'ss02' on;
+}
+
+.secondary-header {
+    font-style: normal;
+    font-weight: normal;
+    font-size: $font-l;
+    line-height: 140%;
+}
+
+.tertiary-header {
+    font-style: normal;
+    font-weight: normal;
+    font-size: $font-m;
+    line-height: 140%;
+}
+
+.footnote {
+    font-style: normal;
+    font-weight: normal;
+    font-size: $font-xs;
+    line-height: 140%;
+}
+
+.footnote-medium {
+    font-style: normal;
+    font-weight: 500;
+    font-size: $font-xs;
+    line-height: 140%;
+}

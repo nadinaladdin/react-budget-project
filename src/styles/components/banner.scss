@@ -1,0 +1,54 @@
+.banner {
+  width: 416px;
+  background: $choco-10;
+  border-radius: 8px;
+  position: relative;
+  padding: 16px;
+
+  &__close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  &__close-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    stroke: $choco-40;
+
+    &:hover {
+      stroke: $choco-60;
+    }
+
+    &:active {
+      stroke: $choco-90;
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: $choco-90;
+  }
+
+  &__text {
+    margin-top: 2px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 140%;
+    color: $choco-50;
+  }
+
+  & button {
+    margin-top: 12px;
+  }
+}
