@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import sprite from "../../../assets/sprite.svg";
+import PropTypes from 'prop-types';
 
 const Banner = ({title, text, ...props}) => {
     return (
-        <div className="banner">
+        <div className="banner" data-test="component-banner">
             <div className="banner__close-button">
                 <svg className="banner__close-icon"><use xlinkHref={`${sprite}#Cross`} /></svg>
             </div>
@@ -12,6 +13,12 @@ const Banner = ({title, text, ...props}) => {
             {props.children}
         </div>
     )
-}
+};
+
+Banner.propTypes = {
+    title: PropTypes.string,
+    text: PropTypes.string,
+    children: PropTypes.node
+};
 
 export default Banner;

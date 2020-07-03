@@ -1,12 +1,21 @@
 import React from 'react'
 import AccountWidget from "../../widgets/accountsWidget";
 
-const AccountsPage  = ({accounts, createAccount}) => {
-    return (
-        <div>
-            <AccountWidget accounts={accounts} createAccount={createAccount}/>
-        </div>
-    );
-};
+class AccountsPage extends React.Component {
+    componentDidMount() {
+        const {fetchAccounts} = this.props;
+        console.log('fetchAccounts');
+        fetchAccounts();
+    }
+
+    render() {
+        const {accounts, createAccount, error} = this.props;
+        return (
+            <div>
+                <AccountWidget accounts={accounts} createAccount={createAccount} error={error} />
+            </div>
+        )
+    }
+}
 
 export default AccountsPage;

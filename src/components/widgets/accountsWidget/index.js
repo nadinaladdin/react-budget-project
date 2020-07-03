@@ -14,7 +14,7 @@ export default class AccountWidget extends Component {
     }
 
     handleChangeValue = (value) => {
-        this.setState({inputValue: value})
+        this.setState({inputValue: value});
         if (!value !== this.state.isButtonDisabled) {
             this.setState({isButtonDisabled: !value});
         }
@@ -27,12 +27,14 @@ export default class AccountWidget extends Component {
             inputValue: null,
             isButtonDisabled: true
         });
+        console.log(this.state);
     };
 
     render() {
+        console.log('RENDER');
         const {accounts, createAccount} = this.props;
 
-        const accountBody = accounts
+        const accountBody = accounts && accounts.length > 0
             ? <AccountsList accounts={accounts}/>
             : (<div className="empty-alert">
                 <img  src={CreditCard} alt="credit-card-icon" className="empty-alert__icon"/>

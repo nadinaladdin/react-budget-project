@@ -1,32 +1,43 @@
 import {accountsActionTypes} from "./actions";
 
 const DEFAULT_STATE = {
-    accounts: [
-        {
-            title: "Зарплатная карта",
-            total: "45000"
-        },
-        {
-            title: "Финансовая подушка",
-            total: "17000"
-        },
-        {
-            title: "Буфер",
-            total: "20000"
-        }
-    ]
+    accounts: [],
+    loading: false,
+    error: null
 };
 
 export default (state = DEFAULT_STATE, action) => {
-    switch(action.type) {
-        case accountsActionTypes.FETCH_ACCOUNTS:
+    switch (action.type) {
+        case accountsActionTypes.FETCH_ACCOUNTS_BEGIN:
             return {
-                ...state
+                ...state,
+                loading: true,
+                error: null
             };
-        case accountsActionTypes.CREATE_ACCOUNT:
+        case accountsActionTypes.FETCH_ACCOUNTS_SUCCESS:
             return {
-                ...state, accounts: [action.payload, ...state.accounts]
+                ...state,
+                loading: false,
+                accounts: action.payload.accounts
             };
-        default: return state
+        case accountsActionTypes.FETCH_ACCOUNTS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.error,
+                accounts: []
+            };
+        case accountsActionTypes.CREATE_ACCOUNT_SUCCESS:
+            return {
+                ...state,
+                accounts: [action.payload.account, ...state.accounts]
+            };
+        case accountsActionTypes.CREATE_ACCOUNT_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error
+            };
+        default:
+            return state
     }
 }

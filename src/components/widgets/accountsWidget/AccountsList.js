@@ -5,10 +5,10 @@ const AccountsList = ({accounts}) => {
     const tableRows = accounts.map((account, index) => (
         <tr className="table__row" key={index}>
             <td className="table__cell table__cell_text">
-                {account.title}
+                {account.name}
             </td>
             <td className="table__cell table__cell_number">
-                {account.total} ₽
+                {account.sum} ₽
             </td>
             <td className="table__cell table__cell_button">
                 <OverflowMenu/>
