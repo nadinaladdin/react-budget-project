@@ -9,7 +9,6 @@ export const accountsActionTypes = {
 };
 
 export const fetchAccountsBegin = () => {
-    console.log('HERE BEGIN');
     return  ({
         type: accountsActionTypes.FETCH_ACCOUNTS_BEGIN
     });

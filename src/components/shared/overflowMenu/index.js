@@ -1,7 +1,8 @@
 import React from 'react';
 import sprite from "../../../assets/sprite.svg";
 
-const OverflowMenu = (props) => {
+export const OverflowMenu = ({ children }) => {
+
     return (
         <div className="overflow-menu">
 
@@ -10,12 +11,19 @@ const OverflowMenu = (props) => {
                 </div>
             <div className="overflow-menu__wrapper">
                 <ul className="overflow-menu__list">
-                    <li className="overflow-menu__list-item">Пополнить</li>
-                    <li className="overflow-menu__list-item">Редактировать</li>
-                    <li className="overflow-menu__list-item overflow-menu__list-item_danger">Удалить</li>
+                    {children}
                 </ul>
             </div>
         </div>
     )
 };
-export default OverflowMenu;
+
+export const OverflowMenuItem = ({ title, func, isDanger = false}) => {
+    return (
+        <li 
+        className={`overflow-menu__list-item ${isDanger ? 'overflow-menu__list-item_danger' : ''}`}
+        onClick={func}>
+            {title}
+        </li>
+    )
+}

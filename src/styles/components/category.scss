@@ -1,11 +1,12 @@
 .category {
   position: relative;
+  padding-left: 20px;
   @each $name, $color in $gradients {
     &_#{$name} {
       &::before {
         content: "";
         position: absolute;
-        left: -20px;
+        left: 0;
         top: 50%;
         transform: translateY(-50%);
         width: 12px;

@@ -28,7 +28,7 @@
   }
 
   &__header {
-    padding-left: 36px;
+    padding-left: 16px;
     height: 48px;
     width: 100%;
     border: 1px solid $choco-30;
@@ -84,7 +84,7 @@
   &__list-item {
     position: relative;
     cursor: pointer;
-    padding-left: 36px;
+    padding-left: 16px;
     height: 40px;
     display: flex;
     align-items: center;

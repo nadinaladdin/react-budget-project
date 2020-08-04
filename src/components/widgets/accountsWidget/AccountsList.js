@@ -1,5 +1,5 @@
 import React from 'react'
-import OverflowMenu from '../../shared/overflowMenu'
+import { OverflowMenu, OverflowMenuItem } from '../../shared/overflowMenu'
 
 const AccountsList = ({accounts}) => {
     const tableRows = accounts.map((account, index) => (
@@ -11,7 +11,11 @@ const AccountsList = ({accounts}) => {
                 {account.sum} ₽
             </td>
             <td className="table__cell table__cell_button">
-                <OverflowMenu/>
+                <OverflowMenu>
+                    <OverflowMenuItem title="Пополнить"/>
+                    <OverflowMenuItem title="Редактировать"/>
+                    <OverflowMenuItem title="Удалить" isDanger={true}/>
+                </OverflowMenu>
             </td>
         </tr>
     ));
