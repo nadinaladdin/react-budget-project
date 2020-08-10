@@ -1,33 +1,45 @@
 import { categoriesActionTypes } from './actions';
 
 const DEFAULT_STATE = {
-    categories: [],
-    loading: false,
-    error: null
+  categories: [],
+  loading: false,
+  error: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {
-    switch(action.type) {
-        case categoriesActionTypes.FETCH_CATEGORIES_BEGIN: 
-            return {
-                ...state,
-                loading: true,
-                error: null
-            };
-        case categoriesActionTypes.FETCH_CATEGORIES_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                categories: action.payload.categories
-            };
-        case categoriesActionTypes.FETCH_CATEGORIES_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload.error,
-                categories: []
-            };
-        default:
-            return state;
-    };
-}
+  switch (action.type) {
+    case categoriesActionTypes.SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload.loading,
+      };
+    case categoriesActionTypes.SET_CATEGORIES:
+      return {
+        ...state,
+        loading: false,
+        categories: action.payload.categories,
+      };
+    case categoriesActionTypes.CREATE_CATEGORY:
+      return {
+        ...state,
+        categories: [...state.categories, action.payload],
+      };
+    case categoriesActionTypes.DELETE_CATEGORY:
+      return {
+        ...state,
+        categories: state.categories.filter((category) => category._id !== action.payload),
+      };
+    case categoriesActionTypes.UPDATE_CATEGORY:
+      return {
+        ...state,
+        categories: state.categories.map(category => category._id === action.payload.id ? { ...category, ...action.payload } : category),
+      };
+    case categoriesActionTypes.SET_ERROR:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+    default:
+      return state;
+  }
+};

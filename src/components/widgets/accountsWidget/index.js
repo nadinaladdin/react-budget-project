@@ -2,16 +2,16 @@ import React, {Component} from 'react'
 import Input from "../../shared/input";
 import Button from "../../shared/button";
 import AccountsList from "./AccountsList";
-import CreditCard from "../../../assets/CreditCard.svg"
+import CreditCard from "../../../assets/CreditCard.svg";
 
-export default class AccountWidget extends Component {
+export default class AccountsWidget extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isButtonDisabled: true,
             inputValue: null
         };
-    }
+    };
 
     handleChangeValue = (value) => {
         this.setState({inputValue: value});

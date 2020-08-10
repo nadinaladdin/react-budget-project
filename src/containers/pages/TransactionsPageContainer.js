@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import TransactionsPage from "../../components/pages/transactionsPage";
+import TransactionsPage from '../../components/pages/transactionsPage';
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 
