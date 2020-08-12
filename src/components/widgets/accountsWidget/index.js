@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Input from '../../shared/input';
 import Button from '../../shared/button';
 import AccountsList from './AccountsList';
 import CreditCard from '../../../assets/CreditCard.svg';
+import { AccountType } from '../../propTypes';
 
 export default class AccountsWidget extends Component {
   constructor(props) {
@@ -14,15 +16,20 @@ export default class AccountsWidget extends Component {
   }
 
     handleChangeValue = (value) => {
+      const { isButtonDisabled } = this.state;
       this.setState({ inputValue: value });
-      if (!value !== this.state.isButtonDisabled) {
+      if (!value !== isButtonDisabled) {
         this.setState({ isButtonDisabled: !value });
       }
     };
 
     handleButtonClicked = () => {
+      const { inputValue } = this.state;
       const { createAccount } = this.props;
-      createAccount(this.state.inputValue);
+      const account = {
+        name: inputValue,
+      };
+      createAccount(account);
       this.setState({
         inputValue: null,
         isButtonDisabled: true,
@@ -30,17 +37,21 @@ export default class AccountsWidget extends Component {
     };
 
     render() {
-      const { accounts, createAccount } = this.props;
+      const {
+        accounts, deleteAccount, updateAccount, loading, error 
+      } = this.props;
+
+      const { isButtonDisabled } = this.state;
 
       const accountBody = accounts && accounts.length > 0
-        ? <AccountsList accounts={accounts} />
+        ? <AccountsList accounts={accounts} deleteButtonClicked={deleteAccount} updateButtonClicked={updateAccount} />
         : (
           <div className="empty-alert">
             <img src={CreditCard} alt="credit-card-icon" className="empty-alert__icon" />
             <h3 className="tertiary-header empty-alert__header">Добавьте свой первый счет</h3>
             <p className="footnote empty-alert__text">
               Каждое пополнение или трата
-              привязывается к счёту, чтобы было легче проводить аналитику
+              привязывается к счёту, чтобы было легче проводить аналитику
             </p>
           </div>
         );
@@ -52,7 +63,7 @@ export default class AccountsWidget extends Component {
           </div>
           <div className="card__form">
             <Input placeholder="Новый счет" changed={(value) => this.handleChangeValue(value)} />
-            <Button type="primary" size="medium" isDisabled={this.state.isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
+            <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
           </div>
           <div className="card__body">
             {accountBody}
@@ -61,3 +72,12 @@ export default class AccountsWidget extends Component {
       );
     }
 }
+
+AccountsWidget.propTypes = {
+  accounts: PropTypes.arrayOf(AccountType).isRequired,
+  deleteAccount: PropTypes.func.isRequired,
+  createAccount: PropTypes.func.isRequired,
+  updateAccount: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+};

@@ -47,7 +47,6 @@ export default class CategoriesWidget extends Component {
   };
 
   handleDropdownClicked = (value) => {
-    console.log('value', value);
     this.setState({ selectedColourItem: value });
   }
 

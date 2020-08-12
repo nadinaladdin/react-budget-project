@@ -6,8 +6,10 @@ import { DropdownItemsType } from '../../propTypes';
 export default class Dropdown extends Component {
   constructor(props) {
     super(props);
+    const { defaultSelectedItem } = this.props;
     this.state = {
       isOpen: false,
+      selectedItem: defaultSelectedItem,
     };
   }
 
@@ -17,13 +19,16 @@ export default class Dropdown extends Component {
 
   handleItemClick = (item) => {
     const { clicked } = this.props;
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen,
+      selectedItem: item,
+    }));
     clicked(item);
   }
 
   render() {
-    const { items, selectedItem } = this.props;
-    const { isOpen } = this.state;
+    const { items } = this.props;
+    const { isOpen, selectedItem } = this.state;
 
     const dropdownItems = items.map(
       (item) => (
@@ -54,9 +59,9 @@ export default class Dropdown extends Component {
 Dropdown.propTypes = {
   items: PropTypes.arrayOf(DropdownItemsType).isRequired,
   clicked: PropTypes.func.isRequired,
-  selectedItem: PropTypes.shape(DropdownItemsType),
+  defaultSelectedItem: PropTypes.shape(DropdownItemsType),
 };
 
 Dropdown.defaultProps = {
-  selectedItem: null,
+  defaultSelectedItem: null,
 };

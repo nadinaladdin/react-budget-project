@@ -1,6 +1,16 @@
 .table {
   padding: 8px 0;
   width: 100%;
+  border-collapse: collapse;
+
+  &__row {
+    &_divider {
+      border-bottom: 1px solid black;
+      td {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
 
   &__cell {
     padding: 8px 0;
@@ -15,6 +25,12 @@
       & > div {
         margin-left: auto;
       }
+    }
+    &_header {
+      vertical-align: top;
+      font-size: 24px;
+      line-height: 140%;
+      color: $choco-90;
     }
   }
 }

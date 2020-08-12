@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import AccountsPage from '../../components/pages/accountsPage';
-import { createAccount, fetchAccounts } from '../../reducers/accounts/actions';
+import {
+  createAccount, fetchAccounts, deleteAccount, updateAccount,
+} from '../../reducers/accounts/actions';
 
 const mapStateToProps = (state) => ({
   accounts: state.accounts.accounts,
@@ -11,6 +13,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchAccounts: () => dispatch(fetchAccounts()),
   createAccount: (accountTitle) => dispatch(createAccount(accountTitle)),
+  deleteAccount: (accountId) => dispatch(deleteAccount(accountId)),
+  updateAccount: (account) => dispatch(updateAccount(account)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);
