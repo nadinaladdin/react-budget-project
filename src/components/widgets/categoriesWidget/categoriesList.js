@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { OverflowMenu, OverflowMenuItem } from '../../shared/overflowMenu';
 import { CategoryType } from '../../propTypes';
 
-const CategoriesList = ({ categories, handleDeleteButton }) => {
+const CategoriesList = ({ categories, deleteButtonClicked, updateButtonClicked }) => {
   const categoriesRows = categories.map((category) => (
     <tr className="table__row">
       <td className="table__cell table__cell_text">
@@ -12,8 +12,8 @@ const CategoriesList = ({ categories, handleDeleteButton }) => {
       <td className="table__cell table__cell_button">
         <OverflowMenu>
           <OverflowMenuItem title="Записать трату" />
-          <OverflowMenuItem title="Редактировать" />
-          <OverflowMenuItem title="Удалить" isDanger onClick={handleDeleteButton} />
+          <OverflowMenuItem title="Редактировать" clicked={() => updateButtonClicked(category)} />
+          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(category._id)} />
         </OverflowMenu>
       </td>
     </tr>
@@ -27,7 +27,9 @@ const CategoriesList = ({ categories, handleDeleteButton }) => {
 
 CategoriesList.propTypes = {
   categories: PropTypes.arrayOf(CategoryType).isRequired,
-  handleDeleteButton: PropTypes.func.isRequired,
+  deleteButtonClicked: PropTypes.func.isRequired,
+  updateButtonClicked: PropTypes.func.isRequired,
+
 };
 
 export default CategoriesList;

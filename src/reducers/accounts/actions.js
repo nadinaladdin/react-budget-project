@@ -1,58 +1,82 @@
 import api from '../../utils/api';
 
 export const accountsActionTypes = {
-  FETCH_ACCOUNTS_BEGIN: 'FETCH_ACCOUNTS_BEGIN',
-  FETCH_ACCOUNTS_SUCCESS: 'FETCH_ACCOUNTS_SUCCESS',
-  FETCH_ACCOUNTS_FAILURE: 'FETCH_ACCOUNTS_FAILURE',
-  CREATE_ACCOUNT_SUCCESS: 'CREATE_ACCOUNT_SUCCESS',
-  CREATE_ACCOUNT_FAILURE: 'CREATE_ACCOUNT_FAILURE',
+  SET_LOADING: 'SET_LOADING',
+  SET_ERROR: 'SET_ERROR',
+  SET_ACCOUNTS: 'SET_ACCOUNTS',
+  DELETE_ACCOUNT: 'DELETE_ACCOUNT',
+  UPDATE_ACCOUNT: 'UPPDATE_ACCOUNT',
+  CREATE_ACCOUNT: 'CREATE_ACCOUNT',
 };
 
-export const fetchAccountsBegin = () => ({
-  type: accountsActionTypes.FETCH_ACCOUNTS_BEGIN,
+export const setLoading = (isLoading) => ({
+  type: accountsActionTypes.SET_LOADING,
+  payload: isLoading,
 });
 
-export const fetchAccountsSuccess = (accounts) => ({
-  type: accountsActionTypes.FETCH_ACCOUNTS_SUCCESS,
-  payload: { accounts },
+export const setAccounts = (accounts) => ({
+  type: accountsActionTypes.SET_ACCOUNTS,
+  payload: accounts,
 });
 
-export const fetchAccountsFailure = (error) => ({
-  type: accountsActionTypes.FETCH_ACCOUNTS_FAILURE,
-  payload: { error },
+export const setError = (error) => ({
+  type: accountsActionTypes.SET_ERROR,
+  payload: error,
 });
-
-export const createAccountSuccess = (account) => ({
-  type: accountsActionTypes.CREATE_ACCOUNT_SUCCESS,
-  payload: { account },
-});
-
-export const createAccountFailure = (error) => ({
-  type: accountsActionTypes.CREATE_ACCOUNT_FAILURE,
-  payload: { error },
-});
-
-export const createAccount = (accountTitle) => {
-  const account = {
-    name: accountTitle,
-    sum: 0,
-  };
-  return async (dispatch) => {
-    try {
-      const response = await api.post('accounts', account);
-      dispatch(createAccountSuccess(response.data));
-    } catch (error) {
-      dispatch(createAccountFailure(error));
-    }
-  };
-};
 
 export const fetchAccounts = () => async (dispatch) => {
   try {
-    dispatch(fetchAccountsBegin());
+    dispatch(setLoading(true));
     const response = await api.get('accounts');
-    dispatch(fetchAccountsSuccess(response.data));
+    dispatch(setAccounts(response.data));
   } catch (error) {
-    dispatch(fetchAccountsFailure(error));
+    dispatch(setError(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const createAccount = (account) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    await api.post('accounts', account);
+    dispatch({
+      type: accountsActionTypes.CREATE_ACCOUNT,
+      payload: account,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const deleteAccount = (accountId) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    await api.delete(`accounts/${accountId}`);
+    dispatch({
+      type: accountsActionTypes.DELETE_ACCOUNT,
+      payload: accountId,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const updateAccount = (updatedAccount) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    await api.put(`accounts/${updatedAccount._id}`, updatedAccount);
+    dispatch({
+      type: accountsActionTypes.UPDATE_ACCOUNT,
+      payload: updatedAccount,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  } finally {
+    dispatch(setLoading(false));
   }
 };

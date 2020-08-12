@@ -8,34 +8,36 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
-    case accountsActionTypes.FETCH_ACCOUNTS_BEGIN:
+    case accountsActionTypes.SET_LOADING:
       return {
         ...state,
-        loading: true,
-        error: null,
+        loading: action.payload,
       };
-    case accountsActionTypes.FETCH_ACCOUNTS_SUCCESS:
+    case accountsActionTypes.SET_ACCOUNTS:
       return {
         ...state,
         loading: false,
-        accounts: action.payload.accounts,
+        accounts: action.payload,
       };
-    case accountsActionTypes.FETCH_ACCOUNTS_FAILURE:
+    case accountsActionTypes.SET_ERROR:
       return {
         ...state,
-        loading: false,
-        error: action.payload.error,
-        accounts: [],
+        error: action.payload,
       };
-    case accountsActionTypes.CREATE_ACCOUNT_SUCCESS:
+    case accountsActionTypes.CREATE_ACCOUNT:
       return {
         ...state,
-        accounts: [action.payload.account, ...state.accounts],
+        accounts: [...state.accounts, action.payload],
       };
-    case accountsActionTypes.CREATE_ACCOUNT_FAILURE:
+    case accountsActionTypes.DELETE_ACCOUNT:
       return {
         ...state,
-        error: action.payload.error,
+        accounts: state.accounts.filter((account) => account._id !== action.payload),
+      };
+    case accountsActionTypes.UPDATE_ACCOUNT:
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => (account._id === action.payload._id ? { ...account, ...action.payload } : account)),
       };
     default:
       return state;

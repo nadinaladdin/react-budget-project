@@ -11,22 +11,23 @@ export default class Dropdown extends Component {
     };
   }
 
-  handleHeaderButtonClick() {
+  handleHeaderButtonClick = () => {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   }
 
+  handleItemClick = (item) => {
+    const { clicked } = this.props;
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    clicked(item);
+  }
+
   render() {
-    const { items } = this.props;
+    const { items, selectedItem } = this.props;
     const { isOpen } = this.state;
-    let selectedItem = null;
-    // temporary
-    if (items && items.length >= 0) {
-      [selectedItem] = items;
-    }
 
     const dropdownItems = items.map(
       (item) => (
-        <li className={`dropdown__list-item ${selectedItem === item ? 'dropdown__list-item_active' : ''}`}>
+        <li className={`dropdown__list-item ${selectedItem === item ? 'dropdown__list-item_active' : ''}`} onClick={() => this.handleItemClick(item)}>
           <span className={`category category_${item.colour}`}>{item.title}</span>
         </li>
       ),
@@ -36,7 +37,7 @@ export default class Dropdown extends Component {
       <div className="dropdown__wrapper">
         <div className="dropdown__header">
           <div className="dropdown__header-title">
-            <span className={`category category_${selectedItem.colour}`}>{selectedItem.title}</span>
+            { selectedItem && <span className={`category category_${selectedItem.colour}`}>{selectedItem.title}</span> }
           </div>
           <div className="dropdown__header-button" onClick={() => this.handleHeaderButtonClick()}>
             <svg className={`dropdown__icon ${isOpen ? 'dropdown__icon_open' : ''}`}><use xlinkHref={`${sprite}#ChevronDown`} /></svg>
@@ -52,4 +53,10 @@ export default class Dropdown extends Component {
 
 Dropdown.propTypes = {
   items: PropTypes.arrayOf(DropdownItemsType).isRequired,
+  clicked: PropTypes.func.isRequired,
+  selectedItem: PropTypes.shape(DropdownItemsType),
+};
+
+Dropdown.defaultProps = {
+  selectedItem: null,
 };

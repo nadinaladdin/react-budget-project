@@ -11,17 +11,17 @@ export const categoriesActionTypes = {
 
 export const setLoading = (isLoading) => ({
   type: categoriesActionTypes.SET_LOADING,
-  payload: { isLoading },
+  payload: isLoading,
 });
 
 export const setCategories = (categories) => ({
-  type: categoriesActionTypes.FETCH_CATEGORIES_SUCCESS,
-  payload: { categories },
+  type: categoriesActionTypes.SET_CATEGORIES,
+  payload: categories,
 });
 
 export const setError = (error) => ({
   type: categoriesActionTypes.SET_ERROR,
-  payload: { error },
+  payload: error,
 });
 
 export const fetchCategories = () => async (dispatch) => {
@@ -38,11 +38,11 @@ export const fetchCategories = () => async (dispatch) => {
 
 export const createCategory = (category) => async (dispatch) => {
   try {
-    dispatch(setLoading());
+    dispatch(setLoading(true));
     await api.post('categories', category);
     dispatch({
       type: categoriesActionTypes.CREATE_CATEGORY,
-      payload: { category },
+      payload: category,
     });
   } catch (error) {
     dispatch(setError(error));
@@ -53,11 +53,11 @@ export const createCategory = (category) => async (dispatch) => {
 
 export const deleteCategory = (categoryId) => async (dispatch) => {
   try {
-    dispatch(setLoading());
+    dispatch(setLoading(true));
     await api.delete(`categories/${categoryId}`);
     dispatch({
       type: categoriesActionTypes.DELETE_CATEGORY,
-      payload: { categoryId },
+      payload: categoryId,
     });
   } catch (error) {
     dispatch(setError(error));
@@ -68,11 +68,11 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
 
 export const updateCategory = (updatedCategory) => async (dispatch) => {
   try {
-    dispatch(setLoading());
-    await api.put(`categories/${updatedCategory.categoryId}`, updatedCategory);
+    dispatch(setLoading(true));
+    await api.put(`categories/${updatedCategory._id}`, updatedCategory);
     dispatch({
       type: categoriesActionTypes.UPDATE_CATEGORY,
-      payload: { updatedCategory },
+      payload: updatedCategory,
     });
   } catch (error) {
     dispatch(setError(error));

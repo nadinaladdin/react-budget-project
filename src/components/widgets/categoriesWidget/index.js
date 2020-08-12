@@ -8,23 +8,58 @@ import ShoppingBag from '../../../assets/ShoppingBag.svg';
 import { COLOURS } from '../../../utils/constants';
 import { CategoryType } from '../../propTypes';
 
+const dropdownItems = COLOURS.map((colour) => ({
+  title: '',
+  colour,
+}));
+
 export default class CategoriesWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isButtonDisabled: true,
+      inputValue: null,
+      selectedColourItem: dropdownItems ? dropdownItems[0] : null,
     };
   }
 
-  render() {
-    const { categories, deleteCategory } = this.props;
+  handleChangeValue = (value) => {
+    const { isButtonDisabled } = this.state;
+    this.setState({ inputValue: value });
+    if (!value !== isButtonDisabled) {
+      this.setState({ isButtonDisabled: !value });
+    }
+  };
 
-    const dropdownItems = COLOURS.map((colour) => ({
-      title: '',
-      colour,
-    }));
+  handleButtonClicked = () => {
+    const { createCategory } = this.props;
+    const { inputValue, selectedColourItem } = this.state;
+    const category = {
+      name: inputValue,
+      colour: selectedColourItem.colour,
+    };
+    createCategory(category);
+    this.setState({
+      inputValue: null,
+      isButtonDisabled: true,
+      selectedColourItem: null,
+    });
+  };
+
+  handleDropdownClicked = (value) => {
+    console.log('value', value);
+    this.setState({ selectedColourItem: value });
+  }
+
+  render() {
+    const {
+      categories, deleteCategory, updateCategory, loading, error,
+    } = this.props;
+
+    const { selectedColourItem, isButtonDisabled } = this.state;
+  
     const categoryBody = categories && categories.length > 0
-      ? <CategoriesList categories={categories} handleDeleteButton={deleteCategory} />
+      ? <CategoriesList categories={categories} deleteButtonClicked={deleteCategory} updateButtonClicked={updateCategory} />
       : (
         <div className="empty-alert">
           <img src={ShoppingBag} alt="credit-card-icon" className="empty-alert__icon" />
@@ -39,9 +74,9 @@ export default class CategoriesWidget extends Component {
           Категории
         </div>
         <div className="card__form">
-          <Input placeholder="Новая категория" />
-          <Dropdown items={dropdownItems} />
-          <Button type="primary" size="medium">Добавить</Button>
+          <Input placeholder="Новая категория" changed={(value) => this.handleChangeValue(value)} />
+          <Dropdown items={dropdownItems} selectedItem={selectedColourItem} clicked={this.handleDropdownClicked} />
+          <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
         </div>
         <div className="card__body">
           {categoryBody}
@@ -54,4 +89,8 @@ export default class CategoriesWidget extends Component {
 CategoriesWidget.propTypes = {
   categories: PropTypes.arrayOf(CategoryType).isRequired,
   deleteCategory: PropTypes.func.isRequired,
+  createCategory: PropTypes.func.isRequired,
+  updateCategory: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };

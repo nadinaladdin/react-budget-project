@@ -20,15 +20,16 @@ OverflowMenu.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const OverflowMenuItem = ({ title, isDanger }) => (
-  <li className={`overflow-menu__list-item ${isDanger ? 'overflow-menu__list-item_danger' : ''}`}>
+export const OverflowMenuItem = ({ title, isDanger, clicked }) => (
+  <li className={`overflow-menu__list-item ${isDanger ? 'overflow-menu__list-item_danger' : ''}`} onClick={clicked}>
     {title}
   </li>
 );
 
 OverflowMenuItem.propTypes = {
   title: PropTypes.string.isRequired,
-  isDanger: PropTypes.func,
+  isDanger: PropTypes.bool,
+  clicked: PropTypes.func.isRequired,
 };
 
 OverflowMenuItem.defaultProps = {

@@ -11,11 +11,18 @@ class CategoriesPage extends Component {
 
   render() {
     const {
-      categories, error, loading, deleteCategory,
+      categories, error, loading, deleteCategory, createCategory, updateCategory,
     } = this.props;
     return (
       <div>
-        <CategoriesWidget categories={categories} error={error} loading={loading} deleteCategory={deleteCategory} />
+        <CategoriesWidget
+          categories={categories}
+          error={error}
+          loading={loading}
+          deleteCategory={deleteCategory}
+          createCategory={createCategory}
+          updateCategory={updateCategory}
+        />
       </div>
     );
   }
@@ -27,6 +34,8 @@ CategoriesPage.propTypes = {
   error: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   deleteCategory: PropTypes.func.isRequired,
+  createCategory: PropTypes.func.isRequired,
+  updateCategory: PropTypes.func.isRequired,
 };
 
 export default CategoriesPage;
