@@ -36,6 +36,16 @@ export const fetchAccounts = () => async (dispatch) => {
   }
 };
 
+export const getAccounts = () => async (dispatch, getState) => {
+  let state = getState();
+  if (state.accounts.accounts) {
+    return state.accounts.accounts;
+  }
+  dispatch(fetchAccounts());
+  state = getState();
+  return state.accounts.accounts;
+};
+
 export const createAccount = (account) => async (dispatch) => {
   try {
     dispatch(setLoading(true));

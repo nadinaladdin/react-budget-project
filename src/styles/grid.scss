@@ -21,8 +21,8 @@
 
 .layout {
   height: 100vh;
-  background-color: #C2B8B6;
   display: grid;
+  background-color: $choco-10;
   grid-template-columns: 16px [container-start] 1fr [container-end] 16px;
 
   @include md {
@@ -36,7 +36,6 @@
 
 .container {
   height: 100vh;
-  background-color: #98CEFF;
   grid-column: container-start / container-end;
 
   @include md {
@@ -89,4 +88,8 @@
     grid-column: side-menu-start / side-menu-end;
     background-color: $choco-10;
   }
+}
+
+.spreaded-content {
+  grid-column: 1/3;
 }

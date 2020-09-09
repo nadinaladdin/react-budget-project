@@ -1,16 +1,16 @@
 .snackbar {
-  //position: fixed;
-  //right: 24px;
-  //top: 24px;
+  position: fixed;
+  right: 24px;
+  top: 24px;
   box-shadow: $primary-box-shadow;
   background-color: $choco-80;
   width: 256px;
   border-radius: 8px;
   display: flex;
 
-  //animation-duration: 1.5s;
-  //animation-delay: 0s, 5s;
-  //animation-name: fade-in, fade-out;
+  animation-duration: 1.5s;
+  animation-delay: 0s, 5s;
+  animation-name: fade-in, fade-out;
 
   & > * {
     &:not(:last-child) {

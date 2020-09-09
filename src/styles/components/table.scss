@@ -20,6 +20,9 @@
     &_number {
       text-align: right;
       color: $choco-50;
+      &:not(:last-child) {
+        padding-right: 20px;
+      }
     }
     &_button {
       & > div {

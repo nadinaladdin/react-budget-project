@@ -56,7 +56,7 @@ export default class CategoriesWidget extends Component {
     } = this.props;
 
     const { selectedColourItem, isButtonDisabled } = this.state;
-  
+
     const categoryBody = categories && categories.length > 0
       ? <CategoriesList categories={categories} deleteButtonClicked={deleteCategory} updateButtonClicked={updateCategory} />
       : (
@@ -70,7 +70,9 @@ export default class CategoriesWidget extends Component {
     return (
       <div className="card">
         <div className="card__header">
-          Категории
+          <div className="card__title">
+            Категории
+          </div>
         </div>
         <div className="card__form">
           <Input placeholder="Новая категория" changed={(value) => this.handleChangeValue(value)} />

@@ -32,8 +32,12 @@ export default class Dropdown extends Component {
 
     const dropdownItems = items.map(
       (item) => (
-        <li className={`dropdown__list-item ${selectedItem === item ? 'dropdown__list-item_active' : ''}`} onClick={() => this.handleItemClick(item)}>
-          <span className={`category category_${item.colour}`}>{item.title}</span>
+        <li
+          key={item}
+          className={`dropdown__list-item ${selectedItem === item ? 'dropdown__list-item_active' : ''}`}
+          onClick={() => this.handleItemClick(item)}
+        >
+          <span className={item.colour ? `category category_${item.colour}` : ''}>{item.title}</span>
         </li>
       ),
     );
@@ -42,7 +46,7 @@ export default class Dropdown extends Component {
       <div className="dropdown__wrapper">
         <div className="dropdown__header">
           <div className="dropdown__header-title">
-            { selectedItem && <span className={`category category_${selectedItem.colour}`}>{selectedItem.title}</span> }
+            { selectedItem && <span className={selectedItem.colour ? `category category_${selectedItem.colour}` : ''}>{selectedItem.title}</span> }
           </div>
           <div className="dropdown__header-button" onClick={() => this.handleHeaderButtonClick()}>
             <svg className={`dropdown__icon ${isOpen ? 'dropdown__icon_open' : ''}`}><use xlinkHref={`${sprite}#ChevronDown`} /></svg>

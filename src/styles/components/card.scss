@@ -2,15 +2,25 @@
   width: 100%;
   border-radius: 12px;
   background: white;
-  padding: 24px;
+  padding: 0 24px 24px 24px;
 
    &__header {
-     color: $choco-50;
+     height: 72px;
+     display: flex;
+     align-items: center;
+   }
+
+   &__title {
+    color: $choco-50;
+   }
+
+   &__controls {
+     margin-left: auto;
    }
 
   &__form {
     display: flex;
-    margin: 24px 0;
+    margin-bottom: 24px;
     & > * {
       &:not(:last-child) {
         margin-right: 12px;

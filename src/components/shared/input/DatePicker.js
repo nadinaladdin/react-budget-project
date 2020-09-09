@@ -130,8 +130,15 @@ export default class DatePicker extends Component {
               {WEEKDAY_NAME.map((weekDay) => (<div key={weekDay} className="datepicker__weekday">{weekDay}</div>))}
             </div>
             <div className="datepicker__calendar">
-              {monthDays.map((day, id) => (
-                <MonthDay key={id} isNotVisibleMonth={day.isNotVisibleMonth} clicked={() => this.handleDayMonthClicked(day.date)} isSelected={visibleDate.getTime() === day.date.getTime()}>{day.date.getDate()}</MonthDay>
+              {monthDays.map((day) => (
+                <MonthDay
+                  key={day}
+                  isNotVisibleMonth={day.isNotVisibleMonth}
+                  clicked={() => this.handleDayMonthClicked(day.date)}
+                  isSelected={visibleDate.getTime() === day.date.getTime()}
+                >
+                  {day.date.getDate()}
+                </MonthDay>
               ))}
             </div>
             <div className="datepicker__bottom-menu">

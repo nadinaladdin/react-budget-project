@@ -38,7 +38,7 @@ export default class AccountsWidget extends Component {
 
     render() {
       const {
-        accounts, deleteAccount, updateAccount, loading, error 
+        accounts, deleteAccount, updateAccount, loading, error,
       } = this.props;
 
       const { isButtonDisabled } = this.state;
@@ -59,7 +59,9 @@ export default class AccountsWidget extends Component {
       return (
         <div className="card">
           <div className="card__header">
-            Счета
+            <div className="card__title">
+              Счета
+            </div>
           </div>
           <div className="card__form">
             <Input placeholder="Новый счет" changed={(value) => this.handleChangeValue(value)} />

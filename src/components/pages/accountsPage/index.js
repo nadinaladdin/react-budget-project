@@ -28,7 +28,7 @@ class AccountsPage extends React.Component {
   }
 }
 
-AccountsPage.propTypCategoriesPage.propTypes = {
+AccountsPage.propTypes = {
   fetchAccounts: PropTypes.func.isRequired,
   accounts: PropTypes.arrayOf(AccountType).isRequired,
   error: PropTypes.string.isRequired,
