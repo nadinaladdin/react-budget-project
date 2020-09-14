@@ -1,0 +1,14 @@
+.badge {
+    cursor: pointer;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    background: $choco-10;
+    border-radius: 6px;
+    padding: 8px;
+
+    &:hover,
+    &_active {
+        background: $choco-20;
+    }
+ }

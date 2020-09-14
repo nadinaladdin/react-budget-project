@@ -107,7 +107,7 @@ export default class DatePicker extends Component {
           <div className="icon-input">
             <Input defaultValue={defaultValue} />
             <div className="icon-input__button" onClick={() => this.handleHeaderButtonClick()}>
-              <svg className="icon-input__icon"><use xlinkHref={`${sprite}#Calendar2`} /></svg>
+              <svg className="icon-input__icon"><use xlinkHref={`${sprite}#Calendar`} /></svg>
             </div>
           </div>
           <div className={`datepicker__container ${this.state.isOpen ? 'datepicker__container_open' : ''}`}>

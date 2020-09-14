@@ -67,6 +67,7 @@ export default class AccountsWidget extends Component {
             <Input placeholder="Новый счет" changed={(value) => this.handleChangeValue(value)} />
             <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
           </div>
+          <div className="card__divider" />
           <div className="card__body">
             {accountBody}
           </div>

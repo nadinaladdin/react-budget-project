@@ -46,6 +46,7 @@ export default class TransactionsWidget extends Component {
               </Button>
             </div>
           </div>
+          <div className="card__divider" />
           <div className="card__body">
             {transactionBody}
           </div>

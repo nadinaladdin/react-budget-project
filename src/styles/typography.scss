@@ -21,14 +21,6 @@ html {
     font-size: $font-xl;
 }
 
-.primary-header-promo {
-    font-style: normal;
-    font-weight: normal;
-    font-size: $font-xl-promo;
-    line-height: 140%;
-    font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on, 'ss02' on;
-}
-
 .secondary-header {
     font-style: normal;
     font-weight: normal;
@@ -55,4 +47,8 @@ html {
     font-weight: 500;
     font-size: $font-xs;
     line-height: 140%;
+}
+
+.text-promo {
+    font-feature-settings: 'tnum' on, 'lnum' on, 'ss01' on, 'ss02' on;
 }

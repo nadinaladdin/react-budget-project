@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import sprite from '../../../assets/sprite.svg';
 
-export const OverflowMenu = ({ children }) => (
+export const OverflowMenu = ({ children, title, customIcon }) => (
   <div className="overflow-menu">
 
     <div className="overflow-menu__button">
-      <svg className="overflow-menu__icon"><use xlinkHref={`${sprite}#Ellipsis`} /></svg>
+      <svg className="overflow-menu__icon">{customIcon || (<use xlinkHref={`${sprite}#Ellipsis`} />)}</svg>
+      <span className="overflow-menu__title">{title}</span>
     </div>
     <div className="overflow-menu__wrapper">
       <ul className="overflow-menu__list">
@@ -18,6 +19,13 @@ export const OverflowMenu = ({ children }) => (
 
 OverflowMenu.propTypes = {
   children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  customIcon: PropTypes.node,
+};
+
+OverflowMenu.defaultProps = {
+  title: null,
+  customIcon: null,
 };
 
 export const OverflowMenuItem = ({ title, isDanger, clicked }) => (

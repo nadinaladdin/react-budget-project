@@ -17,6 +17,9 @@
     &_text {
       color: $choco-90;
     }
+    &_hidden-text {
+      color: $choco-50; 
+    }
     &_number {
       text-align: right;
       color: $choco-50;

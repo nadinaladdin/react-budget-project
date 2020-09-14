@@ -79,6 +79,7 @@ export default class CategoriesWidget extends Component {
           <Dropdown items={dropdownItems} selectedItem={selectedColourItem} clicked={this.handleDropdownClicked} />
           <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
         </div>
+        <div className="card__divider" />
         <div className="card__body">
           {categoryBody}
         </div>

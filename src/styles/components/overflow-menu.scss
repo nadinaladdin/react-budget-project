@@ -15,13 +15,19 @@
 
   &__button {
     cursor: pointer;
-    width: min-content;
+    display: flex;
+    align-items: center;
   }
 
   &__icon {
     width: 24px;
     height: 24px;
     fill: $choco-50;
+  }
+
+  &__title {
+    color: $choco-50;
+    margin-left: 4px;
   }
 
   &__list {
