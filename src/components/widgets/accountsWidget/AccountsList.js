@@ -18,7 +18,7 @@ const AccountsList = ({ accounts, deleteButtonClicked, updateButtonClicked }) =>
         <OverflowMenu>
           <OverflowMenuItem title="Пополнить" />
           <OverflowMenuItem title="Редактировать" clicked={() => updateButtonClicked(account)} />
-          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(account._id)} />
+          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(account)} />
         </OverflowMenu>
       </td>
     </tr>

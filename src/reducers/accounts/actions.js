@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import { setMessage } from '../messages/actions';
 
 export const accountsActionTypes = {
   SET_LOADING: 'SET_LOADING',
@@ -61,14 +62,17 @@ export const createAccount = (account) => async (dispatch) => {
   }
 };
 
-export const deleteAccount = (accountId) => async (dispatch) => {
+export const deleteAccount = (account) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.delete(`accounts/${accountId}`);
+    await api.delete(`accounts/${account.id}`);
     dispatch({
       type: accountsActionTypes.DELETE_ACCOUNT,
-      payload: accountId,
+      payload: account.id,
     });
+    dispatch(setMessage({
+      text: `Счет «${account.name}» удален`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {
@@ -79,7 +83,7 @@ export const deleteAccount = (accountId) => async (dispatch) => {
 export const updateAccount = (updatedAccount) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.put(`accounts/${updatedAccount._id}`, updatedAccount);
+    await api.put(`accounts/${updatedAccount.id}`, updatedAccount);
     dispatch({
       type: accountsActionTypes.UPDATE_ACCOUNT,
       payload: updatedAccount,

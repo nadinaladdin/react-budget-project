@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Navigation from './navigation';
 import TransactionModal from '../modals/transactionModal';
 import FloatingButton from '../shared/button/FloatingButton';
+import { CategoryType, AccountType } from '../propTypes';
+import MessageContainer from '../../containers/MessageContainer';
 
 export default class Layout extends Component {
   constructor(props) {
@@ -13,10 +15,9 @@ export default class Layout extends Component {
   }
 
   componentDidMount() {
-    const { fetchTransactions, fetchCategories, fetchAccounts } = this.props;
+    const { fetchCategories, fetchAccounts } = this.props;
     fetchAccounts();
     fetchCategories();
-    fetchTransactions();
   }
 
   handleModalVisibility = () => {
@@ -25,7 +26,7 @@ export default class Layout extends Component {
 
   render() {
     const {
-      children, loadingAccounts, loadingCategories, categories, accounts,
+      children, categories, accounts,
     } = this.props;
     const { isOpenModal } = this.state;
 
@@ -48,8 +49,9 @@ export default class Layout extends Component {
         />
         )}
         <div className="button-container">
-          <FloatingButton clicked={this.handleModalVisibility}/>
+          <FloatingButton clicked={this.handleModalVisibility} />
         </div>
+        <MessageContainer />
       </div>
     );
   }
@@ -57,4 +59,8 @@ export default class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  categories: PropTypes.arrayOf(CategoryType).isRequired,
+  accounts: PropTypes.arrayOf(AccountType).isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  fetchAccounts: PropTypes.func.isRequired,
 };

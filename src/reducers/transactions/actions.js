@@ -24,7 +24,7 @@ export const setTransactions = (transactions) => ({
   payload: transactions,
 });
 
-export const fetchTransactions = () => async (dispatch) => {
+const fetchTransactions = () => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await api.get('transactions');
@@ -34,6 +34,14 @@ export const fetchTransactions = () => async (dispatch) => {
   } finally {
     dispatch(setLoading(false));
   }
+};
+
+export const fetchTransactionsIfNeeded = () => async (dispatch, getState) => {
+  const state = getState();
+  if (state.transactions.transactions) {
+    return Promise.resolve();
+  }
+  return dispatch(fetchTransactions());
 };
 
 export const createTransaction = (transaction) => async (dispatch) => {
@@ -69,7 +77,7 @@ export const deleteTransaction = (transactionId) => async (dispatch) => {
 export const updateTransaction = (updatedTransaction) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.put(`transactions/${updatedTransaction._id}`, updatedTransaction);
+    await api.put(`transactions/${updatedTransaction.id}`, updatedTransaction);
     dispatch({
       type: transactionsActionTypes.UPDATE_TRANSACTION,
       payload: updatedTransaction,

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import sprite from '../../../assets/sprite.svg';
 
 const Snackbar = ({
-  snackbarText, isMessageStateShown, messageState, linkText, linkClicked,
+  snackbarText, messageState, linkText, linkClicked, close, id,
 }) => {
-  const messageStateIcon = isMessageStateShown
+  const messageStateIcon = messageState
     ? (
       <div className={`snackbar__message-state snackbar__message-state_${messageState}`}>
         <svg className="snackbar__icon"><use xlinkHref={`${sprite}#${messageState.charAt(0).toUpperCase()}${messageState.substring(1)}`} /></svg>
@@ -26,7 +26,7 @@ const Snackbar = ({
         {snackbarText}
         {snackbarLink}
       </div>
-      <div className="snackbar__close-button">
+      <div className="snackbar__close-button" onClick={() => close(id)}>
         <svg className="snackbar__close-icon"><use xlinkHref={`${sprite}#Cross`} /></svg>
       </div>
     </div>
@@ -35,15 +35,15 @@ const Snackbar = ({
 
 Snackbar.propTypes = {
   snackbarText: PropTypes.string.isRequired,
-  isMessageStateShown: PropTypes.bool,
   messageState: PropTypes.string,
   linkText: PropTypes.string,
   linkClicked: PropTypes.func,
+  close: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 Snackbar.defaultProps = {
-  isMessageStateShown: true,
-  messageState: 'success',
+  messageState: null,
   linkText: null,
   linkClicked: null,
 };

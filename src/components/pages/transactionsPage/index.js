@@ -4,20 +4,21 @@ import TransactionsWidget from '../../widgets/transactionsWidget';
 import { TransactionType, CategoryType, AccountType } from '../../propTypes';
 
 class TransactionsPage extends Component {
+  componentDidMount() {
+    const { fetchTransactions } = this.props;
+    fetchTransactions();
+  }
+
   render() {
     const {
-      transactions, error, loadingTransactions, loadingAccounts, loadingCategories, deleteTransaction, createTransaction, updateTransaction, categories, accounts,
+      transactions, error, loading, deleteTransaction, createTransaction, updateTransaction, categories, accounts,
     } = this.props;
-    console.log(loadingAccounts);
-    console.log(loadingCategories);
     return (
       <div className="spreaded-content">
         <TransactionsWidget
           transactions={transactions}
           error={error}
-          loadingTransactions={loadingTransactions}
-          loadingAccounts={loadingAccounts}
-          loadingCategories={loadingCategories}
+          loadingTransactions={loading}
           categories={categories}
           accounts={accounts}
           deleteTransaction={deleteTransaction}
@@ -33,7 +34,7 @@ TransactionsPage.propTypes = {
   fetchTransactions: PropTypes.func.isRequired,
   transactions: PropTypes.arrayOf(TransactionType).isRequired,
   error: PropTypes.string.isRequired,
-  loadingCategories: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   createTransaction: PropTypes.func.isRequired,
   updateTransaction: PropTypes.func.isRequired,

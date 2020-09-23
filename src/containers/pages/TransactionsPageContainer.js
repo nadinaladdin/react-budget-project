@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
 import TransactionsPage from '../../components/pages/transactionsPage';
 import {
-  fetchTransactions, deleteTransaction, createTransaction, updateTransaction,
+  deleteTransaction, createTransaction, updateTransaction, fetchTransactionsIfNeeded,
 } from '../../reducers/transactions/actions';
 
 const mapStateToProps = (state) => ({
   transactions: state.transactions.transactions,
-  loadingTransactions: state.transactions.loading,
-  loadingAccounts: state.accounts.loading,
-  loadingCategories: state.categories.loading,
+  loading: state.transactions.loading,
   error: state.transactions.error,
   categories: state.categories.categories,
   accounts: state.accounts.accounts,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchTransactions: () => dispatch(fetchTransactions()),
+  fetchTransactions: () => dispatch(fetchTransactionsIfNeeded()),
   deleteTransaction: (transactionId) => dispatch(deleteTransaction(transactionId)),
   createTransaction: (transaction) => dispatch(createTransaction(transaction)),
   updateTransaction: (transaction) => dispatch(updateTransaction(transaction)),

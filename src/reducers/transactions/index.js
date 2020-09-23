@@ -1,7 +1,7 @@
 import { transactionsActionTypes } from './actions';
 
 const DEFAULT_STATE = {
-  transactions: [],
+  transactions: null,
   loading: false,
   error: null,
 };
@@ -32,12 +32,12 @@ export default (state = DEFAULT_STATE, action) => {
     case transactionsActionTypes.DELETE_TRANSACTION:
       return {
         ...state,
-        transactions: state.transactions.filter((transaction) => transaction._id !== action.payload),
+        transactions: state.transactions.filter((transaction) => transaction.id !== action.payload),
       };
     case transactionsActionTypes.UPDATE_TRANSACTION:
       return {
         ...state,
-        transactions: state.transactions.map((transaction) => (transaction._id === action.payload._id ? { ...transaction, ...action.payload } : transaction)),
+        transactions: state.transactions.map((transaction) => (transaction.id === action.payload.id ? { ...transaction, ...action.payload } : transaction)),
       };
     default:
       return state;

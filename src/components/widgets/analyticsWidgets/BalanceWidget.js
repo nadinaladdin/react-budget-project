@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { moneyStringFormatter } from '../../../utils/stringUtils';
 
 const BalanceWidget = ({ balance }) => (
   <div className="card">
@@ -9,7 +10,7 @@ const BalanceWidget = ({ balance }) => (
       </div>
     </div>
     <div className="card__body">
-      <h1 className="primary-header text-promo">{balance}</h1>
+      <h1 className="primary-header text-promo">{moneyStringFormatter(balance)}</h1>
     </div>
   </div>
 );

@@ -3,12 +3,16 @@ import { connectRouter } from 'connected-react-router';
 import accounts from './accounts';
 import categories from './categories';
 import transactions from './transactions';
+import analytics from './analytics';
+import messages from './messages';
 
 const rootReducer = (history) => combineReducers({
   router: connectRouter(history),
   accounts,
   categories,
   transactions,
+  analytics,
+  messages,
   // rest of your reducers
 });
 
@@ -18,5 +22,7 @@ export const testRootReducer = () => combineReducers({
   accounts,
   categories,
   transactions,
+  analytics,
+  messages,
   // rest of your reducers
 });

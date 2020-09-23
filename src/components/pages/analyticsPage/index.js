@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropsTypes from 'prop-types';
 import MonthlyExpensesWidget from '../../widgets/analyticsWidgets/MonthlyExpensesWidget';
 import AccountsDebitsWidget from '../../widgets/analyticsWidgets/AccountsDebitsWidget';
 import BalanceWidget from '../../widgets/analyticsWidgets/BalanceWidget';
 
-const AnalyticsPage = (props) => (
-  <>
-    <div>
-      <div><BalanceWidget balance={15000} /></div>
-      <div style={{ marginTop: 16 }}><MonthlyExpensesWidget /></div>
-    </div>
+export default class AnalyticsPage extends Component {
+  componentDidMount() {
+    const { fetchBalance } = this.props;
+    fetchBalance();
+  }
 
-    <div><AccountsDebitsWidget /></div>
-  </>
-);
+  render() {
+    const { balance } = this.props;
+    return (
+      <>
+        <div>
+          <div><BalanceWidget balance={balance} /></div>
+          <div style={{ marginTop: 16 }}><MonthlyExpensesWidget /></div>
+        </div>
 
-export default AnalyticsPage;
+        <div><AccountsDebitsWidget /></div>
+      </>
+    );
+  }
+}
+
+AnalyticsPage.propTypes = {
+  balance: PropsTypes.number.isRequired,
+  fetchBalance: PropsTypes.func.isRequired,
+};

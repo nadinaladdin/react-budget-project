@@ -11,7 +11,7 @@ class AccountsPage extends React.Component {
 
   render() {
     const {
-      accounts, createAccount, error, deleteAccount, updateAccount, loading, 
+      accounts, createAccount, error, deleteAccount, updateAccount, loading,
     } = this.props;
     return (
       <div>

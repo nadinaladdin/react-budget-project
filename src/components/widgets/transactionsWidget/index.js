@@ -4,6 +4,8 @@ import Button from '../../shared/button';
 import TransactionsList from './transactionsList';
 import Receipt from '../../../assets/Receipt.svg';
 import TransactionModal from '../../modals/transactionModal';
+import { TransactionType, CategoryType, AccountType } from '../../propTypes';
+import Loader from '../../shared/loader';
 
 export default class TransactionsWidget extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ export default class TransactionsWidget extends Component {
 
   render() {
     const {
-      transactions, updateTransaction, deleteTransaction, loadingCategories, loadingTransactions, loadingAccounts, error, categories, accounts,
+      transactions, updateTransaction, deleteTransaction, loadingTransactions, error, categories, accounts,
     } = this.props;
 
     const { isOpenModal } = this.state;
@@ -30,7 +32,9 @@ export default class TransactionsWidget extends Component {
         <div className="empty-alert">
           <img src={Receipt} alt="credit-card-icon" className="empty-alert__icon" />
           <h3 className="tertiary-header empty-alert__header">Добавьте свою первую трату</h3>
-          <p className="footnote empty-alert__text">Всё в нашем приложении строится вокруг трат: если запишите все, сможем показать аналитику и показать, на что больше всего уходит денег</p>
+          <p className="footnote empty-alert__text">
+            Всё в нашем приложении строится вокруг трат: если запишите все, сможем показать аналитику и показать, на что больше всего уходит денег
+          </p>
         </div>
       );
     return (
@@ -48,22 +52,28 @@ export default class TransactionsWidget extends Component {
           </div>
           <div className="card__divider" />
           <div className="card__body">
-            {transactionBody}
+            {loadingTransactions
+              ? <Loader />
+              : transactionBody}
           </div>
         </div>
-        {!loadingCategories && !loadingAccounts && (
         <TransactionModal
           isOpen={isOpenModal}
           close={this.handleModalVisibility}
           categories={categories}
           accounts={accounts}
         />
-        )}
       </>
     );
   }
 }
 
 TransactionsWidget.propTypes = {
-
+  transactions: PropTypes.arrayOf(TransactionType).isRequired,
+  loadingTransactions: PropTypes.bool.isRequired,
+  deleteTransaction: PropTypes.func.isRequired,
+  updateTransaction: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+  categories: PropTypes.arrayOf(CategoryType).isRequired,
+  accounts: PropTypes.arrayOf(AccountType).isRequired,
 };

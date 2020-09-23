@@ -3,6 +3,12 @@ export const TRANSACTION_TYPES = {
   CREDIT: 'credit',
   DEBIT: 'debit',
 };
+
+export const MESSAGE_STATES = {
+  SUCCESS: 'success',
+  DANGER: 'danger',
+};
+
 export const CURRENCY = '₽';
 
 export const MONTH_NAME = {

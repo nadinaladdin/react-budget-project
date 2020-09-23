@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Layout from '../components/layout';
-import { fetchTransactions } from '../reducers/transactions/actions';
 import { fetchAccounts } from '../reducers/accounts/actions';
 import { fetchCategories } from '../reducers/categories/actions';
 
@@ -10,7 +9,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchTransactions: () => dispatch(fetchTransactions()),
   fetchAccounts: () => dispatch(fetchAccounts()),
   fetchCategories: () => dispatch(fetchCategories()),
 });

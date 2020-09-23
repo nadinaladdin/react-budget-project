@@ -4,10 +4,11 @@ import { dateParser } from '../../../utils/dateUtils';
 import { moneyStringFormatter } from '../../../utils/stringUtils';
 import { TRANSACTION_TYPES } from '../../../utils/constants';
 import { OverflowMenu, OverflowMenuItem } from '../../shared/overflowMenu';
+import { TransactionType } from '../../propTypes';
 
 const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClicked }) => {
   const transactionsRows = transactions.map((transaction) => (
-    <tr className="table__row" key={transaction._id}>
+    <tr className="table__row" key={transaction.id}>
       <td className="table__cell table__cell_text">
         {dateParser(transaction.date)}
       </td>
@@ -36,6 +37,12 @@ const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClick
       {transactionsRows}
     </table>
   );
+};
+
+TransactionsList.propTypes = {
+  transactions: PropTypes.arrayOf(TransactionType).isRequired,
+  deleteButtonClicked: PropTypes.func.isRequired,
+  updateButtonClicked: PropTypes.func.isRequired,
 };
 
 export default TransactionsList;

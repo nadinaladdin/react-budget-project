@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { TRANSACTION_TYPES } from '../utils/constants';
+import PropTypes, { string } from 'prop-types';
+import { TRANSACTION_TYPES, MESSAGE_STATES } from '../utils/constants';
 
 export const CategoryType = PropTypes.shape({
   name: PropTypes.string.isRequired,
@@ -41,4 +41,10 @@ export const MaskOptionsType = PropTypes.shape({
 export const TabType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+});
+
+export const MessageType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  messageState: PropTypes.oneOf(MESSAGE_STATES),
 });

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchAccounts: () => dispatch(fetchAccounts()),
   createAccount: (accountTitle) => dispatch(createAccount(accountTitle)),
-  deleteAccount: (accountId) => dispatch(deleteAccount(accountId)),
+  deleteAccount: (account) => dispatch(deleteAccount(account)),
   updateAccount: (account) => dispatch(updateAccount(account)),
 });
 
