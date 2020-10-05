@@ -26,7 +26,7 @@ const PromoInput = ({ transactionType, changed }) => {
 
   return (
     <div className="promo-input">
-      <Input maskOptions={currencyMask} placeholder={`${prefix} ${CURRENCY}`} changed={changed}/>
+      <Input maskOptions={currencyMask} placeholder={`${prefix} ${CURRENCY}`} changed={changed} />
     </div>
   );
 };

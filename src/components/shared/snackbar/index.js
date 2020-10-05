@@ -5,6 +5,7 @@ import sprite from '../../../assets/sprite.svg';
 const Snackbar = ({
   snackbarText, messageState, linkText, linkClicked, close, id,
 }) => {
+  console.log('snackbar');
   const messageStateIcon = messageState
     ? (
       <div className={`snackbar__message-state snackbar__message-state_${messageState}`}>

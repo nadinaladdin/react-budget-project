@@ -3,7 +3,7 @@ import MessageLayout from '../components/messageLayout';
 import { deleteMessage } from '../reducers/messages/actions';
 
 const mapStateToProps = (state) => ({
-  messages: state.accounts.messages,
+  messages: state.messages.messages,
 });
 
 const mapDispatchToProps = (dispatch) => ({

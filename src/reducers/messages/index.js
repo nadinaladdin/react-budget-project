@@ -1,7 +1,7 @@
 import { messagesActionTypes } from './actions';
 
 const DEFAULT_STATE = {
-  messages: [],
+  messages: [{ text: 'test test test' }],
 };
 
 export default (state = DEFAULT_STATE, action) => {

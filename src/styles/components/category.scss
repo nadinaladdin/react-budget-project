@@ -1,7 +1,7 @@
 .category {
   position: relative;
   padding-left: 20px;
-  @each $name, $color in $gradients {
+  @each $name, $color in $category-colours {
     &_#{$name} {
       &::before {
         content: "";

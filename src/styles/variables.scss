@@ -78,10 +78,19 @@ $disabled-button-text-color: $choco-40;
 $input-color: $choco-30;
 $input-focus-color: $choco-60;
 
+// CATEGORY COLOURS
+
+$disabled-category: $choco-40;
+
+$category-colours: ((
+  "disabled": $disabled-category
+));
+$category-colours: map-merge($gradients, $category-colours);
+
 // MESSAGE STATES
 
 $message-states: () !default;
-$message-states: map_merge((
+$message-states: map-merge((
   "danger": $red-20,
   "success": $green
 ), $message-states);

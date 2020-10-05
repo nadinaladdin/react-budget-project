@@ -21,7 +21,7 @@ export default class TransactionsWidget extends Component {
 
   render() {
     const {
-      transactions, updateTransaction, deleteTransaction, loadingTransactions, error, categories, accounts,
+      transactions, updateTransaction, deleteTransaction, loadingTransactions, error, categories, accounts, createTransaction,
     } = this.props;
 
     const { isOpenModal } = this.state;
@@ -62,6 +62,7 @@ export default class TransactionsWidget extends Component {
           close={this.handleModalVisibility}
           categories={categories}
           accounts={accounts}
+          createTransaction={createTransaction}
         />
       </>
     );
@@ -73,6 +74,7 @@ TransactionsWidget.propTypes = {
   loadingTransactions: PropTypes.bool.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   updateTransaction: PropTypes.func.isRequired,
+  createTransaction: PropTypes.func.isRequired,
   error: PropTypes.bool.isRequired,
   categories: PropTypes.arrayOf(CategoryType).isRequired,
   accounts: PropTypes.arrayOf(AccountType).isRequired,

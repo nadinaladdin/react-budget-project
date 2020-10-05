@@ -26,6 +26,8 @@ export const MONTH_NAME = {
   11: 'Декабрь',
 };
 
+export const WEEKDAY_NAME = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
 export const ROOT_LOCATION = '/';
 export const ANALYTICS_LOCATION = '/analytics';
 export const TRANSACTIONS_LOCATION = '/transactions';

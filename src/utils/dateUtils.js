@@ -6,10 +6,11 @@ export const getMonthName = (monthNum) => MONTH_NAME[monthNum];
 
 export const dateParser = (date) => {
   const dateToParse = new Date(date);
-  if (compareDates(dateToParse, new Date())) {
+  const comparedDate = new Date();
+  if (compareDates(dateToParse, comparedDate)) {
     return 'Сегодня';
   }
-  if (compareDates(new Date(dateToParse.setDate(dateToParse.getDate() - 1)), new Date())) {
+  if (compareDates(dateToParse, new Date(comparedDate.setDate(dateToParse.getDate() - 1)))) {
     return 'Вчера';
   }
   return `${dateToParse.getDate()} ${getMonthName(dateToParse.getMonth()).substr(0, 3)}`;

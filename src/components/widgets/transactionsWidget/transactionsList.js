@@ -8,7 +8,7 @@ import { TransactionType } from '../../propTypes';
 
 const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClicked }) => {
   const transactionsRows = transactions.map((transaction) => (
-    <tr className="table__row" key={transaction.id}>
+    <tr className={`table__row${transaction.type === TRANSACTION_TYPES.DEBIT ? '_disabled' : ''}`} key={transaction.id}>
       <td className="table__cell table__cell_text">
         {dateParser(transaction.date)}
       </td>
@@ -16,11 +16,11 @@ const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClick
         {transaction.type === TRANSACTION_TYPES.DEBIT ? '+' : '−'}
         {moneyStringFormatter(transaction.sum)}
       </td>
-      { transaction.category && (
       <td className="table__cell table__cell_text">
-        <span className={`category category_${transaction.category.colour}`}>{transaction.category.name}</span>
+        { transaction.category
+          ? <span className={`category category_${transaction.category.colour}`}>{transaction.category.name}</span>
+          : <span className="category category_disabled">Пополнение</span>}
       </td>
-      ) }
       <td className="table__cell table__cell_text">
         {transaction.account.name}
       </td>

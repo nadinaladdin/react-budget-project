@@ -8,6 +8,7 @@ import AccountsPageContainer from '../containers/pages/AccountsPageContainer';
 import {
   ROOT_LOCATION, ANALYTICS_LOCATION, TRANSACTIONS_LOCATION, CATEGORIES_LOCATION, ACCOUNTS_LOCATION,
 } from '../utils/constants';
+import MessageContainer from '../containers/MessageContainer';
 
 const routes = (
   <>
@@ -17,6 +18,7 @@ const routes = (
       <Route path={TRANSACTIONS_LOCATION} component={TransactionsPageContainer} />
       <Route path={CATEGORIES_LOCATION} component={CategoriesPageContainer} />
       <Route path={ACCOUNTS_LOCATION} component={AccountsPageContainer} />
+      <MessageContainer />
     </LayoutContainer>
   </>
 );

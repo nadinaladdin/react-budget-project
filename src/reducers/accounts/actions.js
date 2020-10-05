@@ -73,6 +73,7 @@ export const deleteAccount = (account) => async (dispatch) => {
     dispatch(setMessage({
       text: `Счет «${account.name}» удален`,
     }));
+    console.log('Message setting');
   } catch (error) {
     dispatch(setError(error));
   } finally {

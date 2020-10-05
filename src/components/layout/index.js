@@ -4,7 +4,6 @@ import Navigation from './navigation';
 import TransactionModal from '../modals/transactionModal';
 import FloatingButton from '../shared/button/FloatingButton';
 import { CategoryType, AccountType } from '../propTypes';
-import MessageContainer from '../../containers/MessageContainer';
 
 export default class Layout extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class Layout extends Component {
 
   render() {
     const {
-      children, categories, accounts,
+      children, categories, accounts, createTransaction,
     } = this.props;
     const { isOpenModal } = this.state;
 
@@ -42,6 +41,7 @@ export default class Layout extends Component {
         </div>
         {categories && categories.length > 0 && accounts && accounts.length > 0 && (
         <TransactionModal
+          createTransaction={createTransaction}
           isOpen={isOpenModal}
           close={this.handleModalVisibility}
           categories={categories}
@@ -51,7 +51,6 @@ export default class Layout extends Component {
         <div className="button-container">
           <FloatingButton clicked={this.handleModalVisibility} />
         </div>
-        <MessageContainer />
       </div>
     );
   }
@@ -63,4 +62,5 @@ Layout.propTypes = {
   accounts: PropTypes.arrayOf(AccountType).isRequired,
   fetchCategories: PropTypes.func.isRequired,
   fetchAccounts: PropTypes.func.isRequired,
+  createTransaction: PropTypes.func.isRequired,
 };

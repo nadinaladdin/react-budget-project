@@ -10,6 +10,12 @@
         border-bottom: 1px solid black;
       }
     }
+
+    &_disabled {
+      & > *:not(.table__cell_button) {
+        color: $choco-40 !important;
+      }
+    }
   }
 
   &__cell {
