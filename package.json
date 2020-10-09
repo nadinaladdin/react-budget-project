@@ -68,6 +68,7 @@
     "babel-plugin-react-css-modules": "^5.2.6",
     "connected-react-router": "^6.7.0",
     "history": "^4.10.1",
+    "luxon": "^1.25.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

@@ -39,7 +39,7 @@ export default class TransactionModal extends Component {
 
   handleSumValueChanged = (value) => this.setState({ sumValue: value })
 
-  handleDatepickerClicked = (value) => this.setState({ selectedDate: value })
+  handleDateSelected = (value) => this.setState({ selectedDate: value })
 
   handleSubmitButtonClicked = () => {
     const { createTransaction, close } = this.props;
@@ -101,7 +101,7 @@ export default class TransactionModal extends Component {
                   <Dropdown items={accountItems} defaultSelectedItem={defaultAccountItem} clicked={this.handleAccountDropdownClicked} />
                 </FormItem>
                 <FormItem fieldName="Дата">
-                  <DatePicker selectedDate={selectedDate} clicked={this.handleDatepickerClicked} />
+                  <DatePicker selectedDate={selectedDate} selected={this.handleDateSelected} />
                 </FormItem>
               </FormRow>
             </>

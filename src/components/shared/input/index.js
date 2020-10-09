@@ -17,7 +17,16 @@ const Input = ({
         onChange={(e) => changed(e.target.value)}
       />
     )
-    : <input className="input" type="text" placeholder={placeholder} defaultValue={defaultValue} value={value} onChange={(e) => changed(e.target.value)} />
+    : (
+      <input
+        className="input"
+        type="text"
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        value={value}
+        onChange={(e) => changed(e.target.value)}
+      />
+    )
 );
 
 Input.propTypes = {

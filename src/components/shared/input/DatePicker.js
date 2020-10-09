@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { DateTime } from 'luxon';
 import PropTypes from 'prop-types';
+import MaskedInput from 'react-text-mask';
+import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 import sprite from '../../../assets/sprite.svg';
-import Input from './index';
-import { dateParser, compareDates } from '../../../utils/dateUtils';
+import { dateFormatter, formatStringToDateTime } from '../../../utils/dateUtils';
 import { MONTH_NAME, WEEKDAY_NAME } from '../../../utils/constants';
 
 const VISIBLE_AMOUNT_OF_DAYS = 42;
@@ -34,76 +36,87 @@ export default class DatePicker extends Component {
   constructor(props) {
     super(props);
     const { defaultDate } = this.props;
+    this.inputRef = React.createRef();
     this.state = {
       isOpen: false,
-      currentDate: new Date(new Date().setHours(0, 0, 0, 0)),
-      visibleDate: defaultDate || new Date(new Date().setHours(0, 0, 0, 0)),
+      visibleDate: defaultDate
+        ? DateTime.fromJSDate(new Date(defaultDate.setHours(0, 0, 0, 0)))
+        : DateTime.fromJSDate(new Date(new Date().setHours(0, 0, 0, 0))),
     };
   }
 
-    getParsedDate = (date) => ({
-      year: date.getFullYear(),
-      month: date.getMonth(),
-      weekDay: date.getDay(),
-      day: date.getDate(),
-    });
-
     handleHeaderButtonClick = () => {
+      this.inputRef.inputElement.focus();
       this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
     };
 
-    getAmountOfDays = (year, month) => new Date(year, month + 1, 0).getDate();
-
-    getStartDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
-
     handleDayMonthClicked = (selectedDate) => {
-      const { clicked } = this.props;
-      this.setState({ visibleDate: selectedDate });
-      clicked(selectedDate);
+      const { selected } = this.props;
+      this.setState({ visibleDate: selectedDate, isOpen: false });
+      selected(new Date(selectedDate.toString()));
     };
 
     handleButtonBackClicked = () => {
-      this.setState((prevState) => ({ visibleDate: new Date(prevState.visibleDate.setMonth(prevState.visibleDate.getMonth() - 1)) }));
+      this.setState((prevState) => ({ visibleDate: prevState.visibleDate.minus({ months: 1 }) }));
     };
 
     handleButtonForwardClicked = () => {
-      this.setState((prevState) => ({ visibleDate: new Date(prevState.visibleDate.setMonth(prevState.visibleDate.getMonth() + 1)) }));
+      this.setState((prevState) => ({ visibleDate: prevState.visibleDate.plus({ months: 1 }) }));
     };
 
+    handleDatePickerInputChange = (value) => {
+      const { selected } = this.props;
+      const date = formatStringToDateTime(value);
+      if (!date) {
+        return;
+      }
+      this.setState({ visibleDate: date, isOpen: false });
+      selected(new Date(date.toString()));
+    }
+
     render() {
-      const { currentDate, visibleDate, isOpen } = this.state;
-      const parsedDate = this.getParsedDate(visibleDate || currentDate);
-      const amountOfDays = this.getAmountOfDays(parsedDate.year, parsedDate.month);
-      const startDayOfMonth = this.getStartDayOfMonth(parsedDate.year, parsedDate.month);
-      const previousMonthAmountOfDays = this.getAmountOfDays(parsedDate.year, parsedDate.month - 1);
-      const dayOffset = startDayOfMonth === 0 ? 6 : startDayOfMonth - 1;
+      const { visibleDate, isOpen } = this.state;
+      const amountOfDays = visibleDate.daysInMonth;
+      const startDayOfMonth = DateTime.local(visibleDate.year, visibleDate.month, 1).weekday;
+      const dayOffset = startDayOfMonth - 1; // 3
 
       const monthDays = [];
 
       for (let i = 0; i < VISIBLE_AMOUNT_OF_DAYS; i += 1) {
-        const date = new Date(visibleDate || currentDate);
         if (i < dayOffset) {
           monthDays.push({
-            date: new Date(date.setMonth(date.getMonth() - 1, previousMonthAmountOfDays - dayOffset + i + 1)),
+            date: DateTime.local(visibleDate.year, visibleDate.month, 1).minus({ days: dayOffset - i }),
             isNotVisibleMonth: true,
           });
         } else if (i >= dayOffset && i < amountOfDays + dayOffset) {
           monthDays.push({
-            date: new Date(date.setDate(i - dayOffset + 1)),
+            date: DateTime.local(visibleDate.year, visibleDate.month, i - dayOffset + 1),
             isNotVisibleMonth: false,
           });
         } else {
           monthDays.push({
-            date: new Date(date.setMonth(date.getMonth() + 1, i - dayOffset - amountOfDays + 1)),
+            date: DateTime.local(visibleDate.year, visibleDate.month, amountOfDays).plus({ days: i - amountOfDays - dayOffset + 1 }),
             isNotVisibleMonth: true,
           });
         }
       }
 
+      const autoCorrectedDatePipe = createAutoCorrectedDatePipe('dd.mm.yyyy');
+
       return (
         <div className="datepicker__wrapper">
           <div className="icon-input">
-            <Input value={dateParser(visibleDate)} />
+            <MaskedInput
+              className="input"
+              type="text"
+              pipe={autoCorrectedDatePipe}
+              mask={[/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]}
+              keepCharPositions
+              guide
+              ref={(input) => { this.inputRef = input; }}
+              value={dateFormatter(visibleDate)}
+              onChange={(e) => this.handleDatePickerInputChange(e.target.value)}
+            />
             <div className="icon-input__button" onClick={() => this.handleHeaderButtonClick()}>
               <svg className="icon-input__icon"><use xlinkHref={`${sprite}#Calendar`} /></svg>
             </div>
@@ -111,9 +124,9 @@ export default class DatePicker extends Component {
           <div className={`datepicker__container ${isOpen ? 'datepicker__container_open' : ''}`}>
             <div className="datepicker__calendar-menu">
               <div className="datepicker__calendar-label">
-                {MONTH_NAME[`${parsedDate.month}`]}
+                {MONTH_NAME[`${visibleDate.month}`]}
                 {' '}
-                {parsedDate.year}
+                {visibleDate.year}
               </div>
               <div className="datepicker__calendar-controls">
                 <div className="datepicker__calendar-control" onClick={() => this.handleButtonBackClicked()}>
@@ -128,37 +141,35 @@ export default class DatePicker extends Component {
               {WEEKDAY_NAME.map((weekDay) => (<div key={weekDay} className="datepicker__weekday">{weekDay}</div>))}
             </div>
             <div className="datepicker__calendar">
-              {monthDays.map((day) => (
+              {monthDays.map((monthDay) => (
                 <MonthDay
-                  key={day}
-                  isNotVisibleMonth={day.isNotVisibleMonth}
-                  clicked={() => this.handleDayMonthClicked(day.date)}
-                  isSelected={visibleDate.getTime() === day.date.getTime()}
+                  key={`${monthDay.date.day}.${monthDay.date.month}`}
+                  isNotVisibleMonth={monthDay.isNotVisibleMonth}
+                  clicked={() => this.handleDayMonthClicked(monthDay.date)}
+                  isSelected={+visibleDate === +monthDay.date}
                 >
-                  {day.date.getDate()}
+                  {monthDay.date.day}
                 </MonthDay>
               ))}
             </div>
             <div className="datepicker__bottom-menu">
               <div
-                className={`datepicker__shortcut footnote-medium ${compareDates(new Date(new Date().setDate(new Date().getDate() - 1)), visibleDate)
-                  ? 'datepicker__shortcut_disabled'
-                  : ''}`}
-                onClick={() => this.handleDayMonthClicked(new Date(new Date().setDate(new Date().getDate() - 1)))}
+                className={`datepicker__shortcut footnote-medium ${+visibleDate === +visibleDate.minus({ days: 1 }) ? 'datepicker__shortcut_disabled' : ''}`}
+                onClick={() => this.handleDayMonthClicked(visibleDate.minus({ days: 1 }))}
               >
                 вчера
               </div>
-              <div 
-              className={`datepicker__shortcut footnote-medium ${compareDates(new Date(), visibleDate) ? 'datepicker__shortcut_disabled' : ''}`}
-              onClick={() => this.handleDayMonthClicked(new Date())}
+              <div
+                className={`datepicker__shortcut footnote-medium ${+visibleDate === +DateTime.fromJSDate(new Date(new Date().setHours(0, 0, 0, 0))) ? 'datepicker__shortcut_disabled' : ''}`}
+                onClick={() => this.handleDayMonthClicked(DateTime.fromJSDate(new Date(new Date().setHours(0, 0, 0, 0))))}
               >
                 сегодня
               </div>
               <div
-                className={`datepicker__shortcut footnote-medium ${compareDates(new Date(new Date().setDate(new Date().getDate() + 1)), visibleDate)
+                className={`datepicker__shortcut footnote-medium ${visibleDate.equals(visibleDate.plus({ days: 1 }))
                   ? 'datepicker__shortcut_disabled'
                   : ''}`}
-                onClick={() => this.handleDayMonthClicked(new Date(new Date().setDate(new Date().getDate() + 1)))}
+                onClick={() => this.handleDayMonthClicked(visibleDate.plus({ days: 1 }))}
               >
                 завтра
               </div>
@@ -171,5 +182,5 @@ export default class DatePicker extends Component {
 
 DatePicker.propTypes = {
   defaultDate: PropTypes.instanceOf(Date).isRequired,
-  clicked: PropTypes.func.isRequired,
+  selected: PropTypes.func.isRequired,
 };
