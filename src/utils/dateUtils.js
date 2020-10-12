@@ -1,20 +1,18 @@
 import { DateTime } from 'luxon';
 import { MONTH_NAME } from './constants';
 
-export const compareDates = (dateA, dateB) => new Date(dateA.setHours(0, 0, 0, 0)).getTime() === new Date(dateB.setHours(0, 0, 0, 0)).getTime();
-
 export const getMonthName = (monthNum) => MONTH_NAME[monthNum];
 
-export const dateParser = (date) => {
-  const dateToParse = new Date(date);
-  const comparedDate = new Date();
-  if (compareDates(dateToParse, comparedDate)) {
+export const dateParser = (dateToParse) => {
+  const date = DateTime.fromJSDate(new Date(new Date(dateToParse).setHours(0, 0, 0, 0)));
+  const dateToCompare = DateTime.fromJSDate(new Date(new Date().setHours(0, 0, 0, 0)));
+  if (+date === +dateToCompare) {
     return 'Сегодня';
   }
-  if (compareDates(dateToParse, new Date(comparedDate.setDate(dateToParse.getDate() - 1)))) {
+  if (+date === +dateToCompare.minus({ days: 1 })) {
     return 'Вчера';
   }
-  return `${dateToParse.getDate()} ${getMonthName(dateToParse.getMonth()).substr(0, 3)}`;
+  return `${date.day} ${getMonthName(date.month).substr(0, 3)}`;
 };
 
 export const dateFormatter = (date) => date.toFormat('dd.MM.yyyy');

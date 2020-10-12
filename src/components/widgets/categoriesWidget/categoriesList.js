@@ -5,7 +5,7 @@ import { CategoryType } from '../../propTypes';
 
 const CategoriesList = ({ categories, deleteButtonClicked, updateButtonClicked }) => {
   const categoriesRows = categories.map((category) => (
-    <tr className="table__row" key={category._id}>
+    <tr className="table__row" key={category.id}>
       <td className="table__cell table__cell_text">
         <span className={`category category_${category.colour}`}>{category.name}</span>
       </td>

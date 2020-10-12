@@ -29,7 +29,7 @@ export const fetchBalance = () => async (dispatch) => {
     const response = await api.get('analytics/balance');
     dispatch(setBalance(response.data));
   } catch (error) {
-    dispatch.setError(error);
+    dispatch(setError(error));
   } finally {
     dispatch(setLoading(false));
   }
@@ -44,9 +44,9 @@ export const fetchMonthlyExpenses = (year, month) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await api.get(`analytics/month-expenses/${year}/${month}`);
-    dispatch(setBalance(response.data));
+    dispatch(setMonthlyExpenses(response.data));
   } catch (error) {
-    dispatch.setError(error);
+    dispatch(setError(error));
   } finally {
     dispatch(setLoading(false));
   }

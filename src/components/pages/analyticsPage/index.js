@@ -6,17 +6,20 @@ import BalanceWidget from '../../widgets/analyticsWidgets/BalanceWidget';
 
 export default class AnalyticsPage extends Component {
   componentDidMount() {
-    const { fetchBalance } = this.props;
+    const { fetchBalance, fetchMonthlyExpenses } = this.props;
+    const date = new Date();
     fetchBalance();
+    fetchMonthlyExpenses(date.getFullYear(), date.getMonth());
   }
 
   render() {
-    const { balance } = this.props;
+    const { balance, monthlyExpenses } = this.props;
+    console.log('BALANCE ', balance);
     return (
       <>
         <div>
           <div><BalanceWidget balance={balance} /></div>
-          <div style={{ marginTop: 16 }}><MonthlyExpensesWidget /></div>
+          <div style={{ marginTop: 16 }}><MonthlyExpensesWidget monthlyExpenses={monthlyExpenses} /></div>
         </div>
 
         <div><AccountsDebitsWidget /></div>
@@ -28,4 +31,5 @@ export default class AnalyticsPage extends Component {
 AnalyticsPage.propTypes = {
   balance: PropsTypes.number.isRequired,
   fetchBalance: PropsTypes.func.isRequired,
+  fetchMonthlyExpenses: PropsTypes.func.isRequired,
 };

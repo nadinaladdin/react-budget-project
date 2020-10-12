@@ -48,3 +48,14 @@ export const MessageType = PropTypes.shape({
   text: PropTypes.string.isRequired,
   messageState: PropTypes.oneOf(MESSAGE_STATES),
 });
+
+export const ChartDataType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  colour: PropTypes.string.isRequired,
+});
+
+export const MonthlyExpensesData = PropTypes.shape({
+  total: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(ChartDataType),
+});

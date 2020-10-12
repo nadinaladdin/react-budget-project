@@ -6,7 +6,7 @@ import PromoInput from '../../shared/input/PromoInput';
 import FormItem from '../../shared/form/FormItem';
 import Dropdown from '../../shared/dropdown/index';
 import { TRANSACTION_TYPES } from '../../../utils/constants';
-import { CategoryType, AccountType } from '../../propTypes';
+import { CategoryType, AccountType, TransactionType } from '../../propTypes';
 import FormRow from '../../shared/form/formRow';
 import DatePicker from '../../shared/input/DatePicker';
 import Button from '../../shared/button';
@@ -19,12 +19,13 @@ const tabs = [
 export default class TransactionModal extends Component {
   constructor(props) {
     super(props);
+    const { transactionToUpdate } = this.props;
     this.state = {
-      checkedValue: TRANSACTION_TYPES.DEBIT,
-      selectedCategoryId: null,
-      selectedAccountId: null,
-      selectedDate: new Date(),
-      sumValue: null,
+      checkedValue: transactionToUpdate ? transactionToUpdate.type : TRANSACTION_TYPES.DEBIT,
+      selectedCategoryId: transactionToUpdate ? transactionToUpdate.category : null,
+      selectedAccountId: transactionToUpdate ? transactionToUpdate.account : null,
+      selectedDate: transactionToUpdate ? transactionToUpdate.date : new Date(),
+      sumValue: transactionToUpdate ? transactionToUpdate.sum : null,
     };
   }
 
@@ -121,4 +122,9 @@ TransactionModal.propTypes = {
   categories: PropTypes.arrayOf(CategoryType).isRequired,
   accounts: PropTypes.arrayOf(AccountType).isRequired,
   createTransaction: PropTypes.func.isRequired,
+  transactionToUpdate: TransactionType,
+};
+
+TransactionModal.defaultProps = {
+  transactionToUpdate: null,
 };

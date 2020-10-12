@@ -1,17 +1,9 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import {
   PieChart, Pie, Sector, Cell, ResponsiveContainer,
 } from 'recharts';
-
-const data = [
-  { name: 'Group A', value: 400, colour: 'red' },
-  { name: 'Group B', value: 300, colour: 'violet' },
-  { name: 'Group C', value: 300, colour: 'orange' },
-  { name: 'Group D', value: 200, colour: 'blue' },
-  { name: 'Group T', value: 400, colour: 'yellow' },
-  { name: 'Group V', value: 300, colour: 'green' },
-  { name: 'Group S', value: 300, colour: 'gray' },
-];
+import { ChartDataType } from '../propTypes';
 
 const renderActiveShape = (props) => {
   const {
@@ -56,6 +48,7 @@ export default class DonutChart extends PureComponent {
 
   render() {
     const { activeIndex } = this.state;
+    const { data } = this.props;
     return (
       <ResponsiveContainer width="65%" height={264}>
         <PieChart>
@@ -111,3 +104,7 @@ export default class DonutChart extends PureComponent {
     );
   }
 }
+
+DonutChart.propTypes = {
+  data: PropTypes.arrayOf(ChartDataType).isRequired,
+};
