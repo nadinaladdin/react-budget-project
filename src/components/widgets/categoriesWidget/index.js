@@ -7,6 +7,7 @@ import CategoriesList from './categoriesList';
 import ShoppingBag from '../../../assets/ShoppingBag.svg';
 import { COLOURS } from '../../../utils/constants';
 import { CategoryType } from '../../propTypes';
+import Loader from '../../shared/loader';
 
 const dropdownItems = COLOURS.map((colour) => ({
   title: '',
@@ -75,13 +76,15 @@ export default class CategoriesWidget extends Component {
           </div>
         </div>
         <div className="card__form">
-          <Input placeholder="Новая категория" changed={(value) => this.handleChangeValue(value)} />
+          <Input placeholder="Новая категория" changed={this.handleChangeValue} />
           <Dropdown items={dropdownItems} selectedItem={selectedColourItem} clicked={this.handleDropdownClicked} />
           <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
         </div>
         <div className="card__divider" />
         <div className="card__body">
-          {categoryBody}
+          {loading
+            ? <Loader />
+            : categoryBody}
         </div>
       </div>
     );

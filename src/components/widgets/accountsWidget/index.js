@@ -5,6 +5,7 @@ import Button from '../../shared/button';
 import AccountsList from './AccountsList';
 import CreditCard from '../../../assets/CreditCard.svg';
 import { AccountType } from '../../propTypes';
+import Loader from '../../shared/loader';
 
 export default class AccountsWidget extends Component {
   constructor(props) {
@@ -64,12 +65,14 @@ export default class AccountsWidget extends Component {
             </div>
           </div>
           <div className="card__form">
-            <Input placeholder="Новый счет" changed={(value) => this.handleChangeValue(value)} />
+            <Input placeholder="Новый счет" changed={this.handleChangeValue} />
             <Button type="primary" size="medium" isDisabled={isButtonDisabled} clicked={() => this.handleButtonClicked()}>Добавить</Button>
           </div>
           <div className="card__divider" />
           <div className="card__body">
-            {accountBody}
+            {loading
+              ? <Loader />
+              : accountBody}
           </div>
         </div>
       );

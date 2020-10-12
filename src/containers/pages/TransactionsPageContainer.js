@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchTransactions: () => dispatch(fetchTransactionsIfNeeded()),
-  deleteTransaction: (transactionId) => dispatch(deleteTransaction(transactionId)),
+  deleteTransaction: (transaction) => dispatch(deleteTransaction(transaction)),
   createTransaction: (transaction) => dispatch(createTransaction(transaction)),
   updateTransaction: (transaction) => dispatch(updateTransaction(transaction)),
 });

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCategories: () => dispatch(fetchCategories()),
-  deleteCategory: (categoryId) => dispatch(deleteCategory(categoryId)),
+  deleteCategory: (category) => dispatch(deleteCategory(category)),
   createCategory: (category) => dispatch(createCategory(category)),
   updateCategory: (category) => dispatch(updateCategory(category)),
 });

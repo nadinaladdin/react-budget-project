@@ -27,7 +27,7 @@ const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClick
       <td className="table__cell table__cell_button">
         <OverflowMenu>
           <OverflowMenuItem title="Редактировать" clicked={() => updateButtonClicked(transaction)} />
-          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(transaction.id)} />
+          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(transaction)} />
         </OverflowMenu>
       </td>
     </tr>

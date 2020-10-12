@@ -1,4 +1,6 @@
 import api from '../../utils/api';
+import { MESSAGE_STATES } from '../../utils/constants';
+import { setMessage } from '../messages/actions';
 
 export const categoriesActionTypes = {
   SET_LOADING: 'SET_LOADING',
@@ -39,11 +41,15 @@ export const fetchCategories = () => async (dispatch) => {
 export const createCategory = (category) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.post('categories', category);
+    const response = await api.post('categories', category);
     dispatch({
       type: categoriesActionTypes.CREATE_CATEGORY,
-      payload: category,
+      payload: response.data,
     });
+    dispatch(setMessage({
+      messageState: MESSAGE_STATES.SUCCESS,
+      text: `Категория «${response.data.name}» успешно добавлена`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {
@@ -51,14 +57,17 @@ export const createCategory = (category) => async (dispatch) => {
   }
 };
 
-export const deleteCategory = (categoryId) => async (dispatch) => {
+export const deleteCategory = (category) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.delete(`categories/${categoryId}`);
+    await api.delete(`categories/${category.id}`);
     dispatch({
       type: categoriesActionTypes.DELETE_CATEGORY,
-      payload: categoryId,
+      payload: category.id,
     });
+    dispatch(setMessage({
+      text: `Категория «${category.name}» удалена`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {
@@ -69,11 +78,15 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
 export const updateCategory = (updatedCategory) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.put(`categories/${updatedCategory._id}`, updatedCategory);
+    await api.put(`categories/${updatedCategory.id}`, updatedCategory);
     dispatch({
       type: categoriesActionTypes.UPDATE_CATEGORY,
       payload: updatedCategory,
     });
+    dispatch(setMessage({
+      messageState: MESSAGE_STATES.SUCCESS,
+      text: `Категория «${updatedCategory.name}» обновлена`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {

@@ -7,7 +7,15 @@ const MessageLayout = ({ messages, deleteMessage }) => (
   messages && messages.length > 0
     ? (
       <div className="message-layout">
-        {messages.map((message) => <Snackbar snackbarText={message.text} close={deleteMessage} id={message.id} key={message.id} />)}
+        {messages.map((message) => (
+          <Snackbar
+            snackbarText={message.text}
+            messageState={message.messageState}
+            close={deleteMessage}
+            id={message.id}
+            key={message.id}
+          />
+        ))}
       </div>
     )
     : null

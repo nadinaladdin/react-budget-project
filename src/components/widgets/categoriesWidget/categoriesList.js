@@ -13,7 +13,7 @@ const CategoriesList = ({ categories, deleteButtonClicked, updateButtonClicked }
         <OverflowMenu>
           <OverflowMenuItem title="Записать трату" />
           <OverflowMenuItem title="Редактировать" clicked={() => updateButtonClicked(category)} />
-          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(category.id)} />
+          <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(category)} />
         </OverflowMenu>
       </td>
     </tr>

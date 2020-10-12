@@ -23,7 +23,6 @@ const Input = ({
         type="text"
         placeholder={placeholder}
         defaultValue={defaultValue}
-        value={value}
         onChange={(e) => changed(e.target.value)}
       />
     )

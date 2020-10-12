@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import { MESSAGE_STATES } from '../../utils/constants';
 import { setMessage } from '../messages/actions';
 
 export const accountsActionTypes = {
@@ -50,11 +51,15 @@ export const getAccounts = () => async (dispatch, getState) => {
 export const createAccount = (account) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    await api.post('accounts', account);
+    const response = await api.post('accounts', account);
     dispatch({
       type: accountsActionTypes.CREATE_ACCOUNT,
-      payload: account,
+      payload: response.data,
     });
+    dispatch(setMessage({
+      messageState: MESSAGE_STATES.SUCCESS,
+      text: `Счет «${response.data.name}» успешно добавлен`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {
@@ -73,7 +78,6 @@ export const deleteAccount = (account) => async (dispatch) => {
     dispatch(setMessage({
       text: `Счет «${account.name}» удален`,
     }));
-    console.log('Message setting');
   } catch (error) {
     dispatch(setError(error));
   } finally {
@@ -89,6 +93,10 @@ export const updateAccount = (updatedAccount) => async (dispatch) => {
       type: accountsActionTypes.UPDATE_ACCOUNT,
       payload: updatedAccount,
     });
+    dispatch(setMessage({
+      messageState: MESSAGE_STATES.SUCCESS,
+      text: `Счет «${updatedAccount.name}» обновлен`,
+    }));
   } catch (error) {
     dispatch(setError(error));
   } finally {
