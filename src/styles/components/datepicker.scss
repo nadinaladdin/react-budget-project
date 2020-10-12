@@ -1,10 +1,10 @@
 .datepicker {
   &__wrapper {
-    z-index: 3;
     position: relative;
   }
 
   &__container {
+    z-index: 3;
     display: none;
     background: white;
     box-shadow: $primary-box-shadow;
