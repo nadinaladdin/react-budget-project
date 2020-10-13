@@ -44,7 +44,7 @@ export default class Dropdown extends Component {
 
     return (
       <div className="dropdown__wrapper">
-        <div className="dropdown__header">
+        <div className={`dropdown__header ${isOpen ? 'dropdown__header_active' : ''}`}>
           <div className="dropdown__header-title">
             { selectedItem && <span className={selectedItem.colour ? `category category_${selectedItem.colour}` : ''}>{selectedItem.title}</span> }
           </div>

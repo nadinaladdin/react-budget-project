@@ -31,9 +31,9 @@ export default class AccountsDebitsWidget extends Component {
         <div className="card__divider" />
         <div className="card__body">
           <AccountDebitsTable />
-          <div className="divider-gap-xs" />
+          <div className="accounts-debits-divider" />
           <AccountDebitsTable />
-          <div className="divider-gap-xs" />
+          <div className="accounts-debits-divider" />
         </div>
       </div>
     );

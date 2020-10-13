@@ -6,7 +6,7 @@ import DonutChart from '../../charts/donutChart';
 import sprite from '../../../assets/sprite.svg';
 import Badge from '../../shared/badge';
 import { MONTH_NAME } from '../../../utils/constants';
-import { MonthlyExpensesData } from '../../propTypes';
+import { MonthlyExpensesType } from '../../propTypes';
 import { moneyStringFormatter } from '../../../utils/stringUtils';
 
 const VISIBLE_AMOUNT_OF_MONTHS = 3;
@@ -51,7 +51,7 @@ export default class MonthlyExpensesWidget extends Component {
               −
               {moneyStringFormatter(monthlyExpenses.total)}
             </h2>
-            <div className="flex-wrap">
+            <div className="category-badges">
               {monthlyExpenses.expenses.map((item) => <Badge title={item.name} colour={item.colour} key={item.name} />)}
             </div>
           </>
@@ -63,6 +63,6 @@ export default class MonthlyExpensesWidget extends Component {
 }
 
 MonthlyExpensesWidget.propTypes = {
-  monthlyExpenses: MonthlyExpensesData.isRequired,
+  monthlyExpenses: MonthlyExpensesType.isRequired,
   changeMonth: PropTypes.func.isRequired,
 };

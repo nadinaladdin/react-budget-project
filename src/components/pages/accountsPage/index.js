@@ -14,7 +14,7 @@ class AccountsPage extends React.Component {
       accounts, createAccount, error, deleteAccount, updateAccount, loading,
     } = this.props;
     return (
-      <div>
+      <div className="content__column">
         <AccountsWidget
           accounts={accounts}
           createAccount={createAccount}

@@ -55,7 +55,7 @@ export const ChartDataType = PropTypes.shape({
   colour: PropTypes.string.isRequired,
 });
 
-export const MonthlyExpensesData = PropTypes.shape({
+export const MonthlyExpensesType = PropTypes.shape({
   total: PropTypes.number.isRequired,
   expenses: PropTypes.arrayOf(ChartDataType),
 });

@@ -35,6 +35,10 @@
     outline: none;
     display: flex;
     justify-content: space-between;
+
+    &_active {
+      border-color: $choco-60;
+    }
   }
 
   &__header-title {
@@ -60,6 +64,7 @@
 
     &_open {
       transform: translate(-50%, -50%) rotate(180deg);
+      stroke: $choco-60;
     }
   }
 

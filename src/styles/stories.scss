@@ -44,21 +44,3 @@
 .width-70 {
   width: 70%;
 }
-
-.flex-wrap {
-  margin-top: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  & > div {
-    margin-bottom: 8px;
-    &:not(:nth-child(3)) {
-      margin-right: 8px;
-    }
-  }
-}
-
-.divider-gap-xs {
-  margin: 8px 0;
-  border-top: solid 1px $choco-10;
-}

@@ -14,7 +14,7 @@ class TransactionsPage extends Component {
       transactions, error, loading, deleteTransaction, createTransaction, updateTransaction, categories, accounts,
     } = this.props;
     return (
-      <div className="spreaded-content">
+      <div className="content__column content__column_spreaded">
         <TransactionsWidget
           transactions={transactions}
           error={error}

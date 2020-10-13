@@ -14,7 +14,7 @@ class CategoriesPage extends Component {
       categories, error, loading, deleteCategory, createCategory, updateCategory,
     } = this.props;
     return (
-      <div>
+      <div className="content__column">
         <CategoriesWidget
           categories={categories}
           error={error}

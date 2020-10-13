@@ -5,10 +5,6 @@
   border-radius: 8px;
   display: flex;
 
-  //animation-duration: 1.5s;
-  //animation-delay: 0s, 5s;
-  //animation-name: fade-in, fade-out;
-
   & > * {
     &:not(:last-child) {
       margin: 12px 0 12px 12px;
@@ -81,26 +77,5 @@
     stroke: $choco-40;
     width: 16px;
     height: 16px;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }
