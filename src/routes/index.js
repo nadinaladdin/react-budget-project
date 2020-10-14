@@ -9,6 +9,7 @@ import {
   ROOT_LOCATION, ANALYTICS_LOCATION, TRANSACTIONS_LOCATION, CATEGORIES_LOCATION, ACCOUNTS_LOCATION,
 } from '../utils/constants';
 import MessageContainer from '../containers/MessageContainer';
+import ModalRootContainer from '../containers/modals/ModalRootContainer';
 
 const routes = (
   <>
@@ -19,6 +20,7 @@ const routes = (
       <Route path={CATEGORIES_LOCATION} component={CategoriesPageContainer} />
       <Route path={ACCOUNTS_LOCATION} component={AccountsPageContainer} />
       <MessageContainer />
+      <ModalRootContainer />
     </LayoutContainer>
   </>
 );

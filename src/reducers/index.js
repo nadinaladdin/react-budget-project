@@ -5,6 +5,7 @@ import categories from './categories';
 import transactions from './transactions';
 import analytics from './analytics';
 import messages from './messages';
+import modal from './modal';
 
 const rootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -13,6 +14,7 @@ const rootReducer = (history) => combineReducers({
   transactions,
   analytics,
   messages,
+  modal,
   // rest of your reducers
 });
 
@@ -24,5 +26,6 @@ export const testRootReducer = () => combineReducers({
   transactions,
   analytics,
   messages,
+  modal,
   // rest of your reducers
 });

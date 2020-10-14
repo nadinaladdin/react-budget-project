@@ -82,9 +82,7 @@
     height: auto;
     
     & > * {
-      &:not(:first-child) {
-        margin-top: 16px;
-      }
+      margin-bottom: 16px;
     }
 
     &_spreaded {

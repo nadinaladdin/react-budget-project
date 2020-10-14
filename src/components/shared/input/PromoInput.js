@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Input from './index';
 import { TRANSACTION_TYPES, CURRENCY } from '../../../utils/constants';
 
-const PromoInput = ({ transactionType, changed }) => {
+const PromoInput = ({ transactionType, changed, defaultValue }) => {
   const prefix = transactionType === TRANSACTION_TYPES.DEBIT ? '+' : '-';
 
   const defaultMaskOptions = {
@@ -26,18 +26,20 @@ const PromoInput = ({ transactionType, changed }) => {
 
   return (
     <div className="promo-input">
-      <Input maskOptions={currencyMask} placeholder={`${prefix} ${CURRENCY}`} changed={changed} />
+      <Input maskOptions={currencyMask} placeholder={`${prefix} ${CURRENCY}`} changed={changed} defaultValue={defaultValue} />
     </div>
   );
 };
 
 PromoInput.propTypes = {
   transactionType: PropTypes.oneOf(TRANSACTION_TYPES),
+  defaultValue: PropTypes.string,
   changed: PropTypes.func.isRequired,
 };
 
 PromoInput.defaultProps = {
   transactionType: TRANSACTION_TYPES.DEBIT,
+  defaultValue: '',
 };
 
 export default PromoInput;

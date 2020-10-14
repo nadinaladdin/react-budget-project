@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TransactionsWidget from '../../widgets/transactionsWidget';
-import { TransactionType, CategoryType, AccountType } from '../../propTypes';
+import { TransactionType } from '../../propTypes';
 
 class TransactionsPage extends Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class TransactionsPage extends Component {
 
   render() {
     const {
-      transactions, error, loading, deleteTransaction, createTransaction, updateTransaction, categories, accounts,
+      transactions, error, loading, deleteTransaction, showModal,
     } = this.props;
     return (
       <div className="content__column content__column_spreaded">
@@ -19,11 +19,8 @@ class TransactionsPage extends Component {
           transactions={transactions}
           error={error}
           loadingTransactions={loading}
-          categories={categories}
-          accounts={accounts}
+          showModal={showModal}
           deleteTransaction={deleteTransaction}
-          createTransaction={createTransaction}
-          updateTransaction={updateTransaction}
         />
       </div>
     );
@@ -36,10 +33,7 @@ TransactionsPage.propTypes = {
   error: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
-  createTransaction: PropTypes.func.isRequired,
-  updateTransaction: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(CategoryType).isRequired,
-  accounts: PropTypes.arrayOf(AccountType).isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default TransactionsPage;

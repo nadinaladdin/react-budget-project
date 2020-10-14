@@ -6,7 +6,7 @@ import { TRANSACTION_TYPES } from '../../../utils/constants';
 import { OverflowMenu, OverflowMenuItem } from '../../shared/overflowMenu';
 import { TransactionType } from '../../propTypes';
 
-const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClicked }) => {
+const TransactionsList = ({ transactions, deleteButtonClicked, showModal }) => {
   const transactionsRows = transactions.map((transaction) => (
     <tr className={`table__row${transaction.type === TRANSACTION_TYPES.DEBIT ? '_disabled' : ''}`} key={transaction.id}>
       <td className="table__cell table__cell_text">
@@ -26,7 +26,7 @@ const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClick
       </td>
       <td className="table__cell table__cell_button">
         <OverflowMenu>
-          <OverflowMenuItem title="Редактировать" clicked={() => updateButtonClicked(transaction)} />
+          <OverflowMenuItem title="Редактировать" clicked={() => showModal('UPDATE_TRANSACTION', { transactionToUpdate: transaction })} />
           <OverflowMenuItem title="Удалить" isDanger clicked={() => deleteButtonClicked(transaction)} />
         </OverflowMenu>
       </td>
@@ -42,7 +42,7 @@ const TransactionsList = ({ transactions, deleteButtonClicked, updateButtonClick
 TransactionsList.propTypes = {
   transactions: PropTypes.arrayOf(TransactionType).isRequired,
   deleteButtonClicked: PropTypes.func.isRequired,
-  updateButtonClicked: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default TransactionsList;

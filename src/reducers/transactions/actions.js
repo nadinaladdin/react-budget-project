@@ -91,6 +91,7 @@ export const deleteTransaction = (transaction) => async (dispatch) => {
 export const updateTransaction = (updatedTransaction) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
+    console.log(updatedTransaction);
     await api.put(`transactions/${updatedTransaction.id}`, updatedTransaction);
     dispatch({
       type: transactionsActionTypes.UPDATE_TRANSACTION,

@@ -6,13 +6,16 @@ import AccountsList from './AccountsList';
 import CreditCard from '../../../assets/CreditCard.svg';
 import { AccountType } from '../../propTypes';
 import Loader from '../../shared/loader';
+import Banner from '../../shared/banner';
 
 export default class AccountsWidget extends Component {
   constructor(props) {
     super(props);
+    const accountBannerIsHide = localStorage.getItem('accountBannerIsHide');
     this.state = {
       isButtonDisabled: true,
       inputValue: null,
+      accountBannerIsHide: accountBannerIsHide ? JSON.parse(accountBannerIsHide) : false,
     };
   }
 
@@ -37,12 +40,17 @@ export default class AccountsWidget extends Component {
       });
     };
 
+    handleAccountBannerClosed = () => {
+      this.setState({ accountBannerIsHide: true });
+      localStorage.setItem('accountBannerIsHide', true);
+    }
+
     render() {
       const {
         accounts, deleteAccount, updateAccount, loading, error,
       } = this.props;
 
-      const { isButtonDisabled } = this.state;
+      const { isButtonDisabled, accountBannerIsHide } = this.state;
 
       const accountBody = accounts && accounts.length > 0
         ? <AccountsList accounts={accounts} deleteButtonClicked={deleteAccount} updateButtonClicked={updateAccount} />
@@ -56,6 +64,18 @@ export default class AccountsWidget extends Component {
             </p>
           </div>
         );
+
+      const accountBanner = !accountBannerIsHide && accounts.length === 1 && accounts[0].sum === 0
+        ? (
+          <Banner
+            close={this.handleAccountBannerClosed}
+            title="Осталось пополнить счёт 🎉"
+            text="Запишите текущий баланс счёта, чтобы было, что тратить. Потом можно будет внести первые расходы."
+          >
+            <Button size="small" type="primary">Пополнить счет</Button>
+          </Banner>
+        )
+        : null;
 
       return (
         <div className="card">
@@ -72,7 +92,13 @@ export default class AccountsWidget extends Component {
           <div className="card__body">
             {loading
               ? <Loader />
-              : accountBody}
+              : (
+                <>
+                  {accountBody}
+                  {' '}
+                  {accountBanner}
+                </>
+              ) }
           </div>
         </div>
       );

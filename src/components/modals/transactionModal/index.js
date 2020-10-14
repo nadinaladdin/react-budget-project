@@ -22,10 +22,10 @@ export default class TransactionModal extends Component {
     const { transactionToUpdate } = this.props;
     this.state = {
       checkedValue: transactionToUpdate ? transactionToUpdate.type : TRANSACTION_TYPES.DEBIT,
-      selectedCategoryId: transactionToUpdate ? transactionToUpdate.category : null,
-      selectedAccountId: transactionToUpdate ? transactionToUpdate.account : null,
+      selectedCategoryId: transactionToUpdate ? transactionToUpdate.category.id : null,
+      selectedAccountId: transactionToUpdate ? transactionToUpdate.account.id : null,
       selectedDate: transactionToUpdate ? transactionToUpdate.date : new Date(),
-      sumValue: transactionToUpdate ? transactionToUpdate.sum : null,
+      sumValue: transactionToUpdate ? `${transactionToUpdate.sum}` : null,
     };
   }
 
@@ -43,26 +43,32 @@ export default class TransactionModal extends Component {
   handleDateSelected = (value) => this.setState({ selectedDate: value })
 
   handleSubmitButtonClicked = () => {
-    const { createTransaction, close } = this.props;
+    const { saveTransaction, hideModal, transactionToUpdate } = this.props;
     const {
       selectedDate, sumValue, selectedCategoryId, selectedAccountId, checkedValue,
     } = this.state;
 
-    createTransaction({
+    const categoryId = checkedValue === TRANSACTION_TYPES.DEBIT ? null : selectedCategoryId;
+
+    saveTransaction({
+      ...transactionToUpdate,
       type: checkedValue,
       date: selectedDate,
       sum: sumValue.replace(/[^\d]/g, ''),
-      category: selectedCategoryId,
+      category: categoryId,
       account: selectedAccountId,
     });
 
-    close();
+    hideModal();
+  }
+
+  handleCloseModal = () => {
+    const { hideModal } = this.props;
+    hideModal();
   }
 
   render() {
-    const {
-      isOpen, close, categories, accounts,
-    } = this.props;
+    const { categories, accounts } = this.props;
     const {
       checkedValue, selectedCategoryId, selectedAccountId, sumValue, selectedDate,
     } = this.state;
@@ -81,47 +87,44 @@ export default class TransactionModal extends Component {
     const defaultAccountItem = selectedAccountId ? accountItems.find((item) => item.id === selectedAccountId) : null;
 
     return (
-      isOpen && (
-        <Modal
-          close={close}
-          header={
-            <Tabs tabs={tabs} checkedValue={checkedValue} changed={this.handleChangeValue} />
+      <Modal
+        close={this.handleCloseModal}
+        header={
+          <Tabs tabs={tabs} checkedValue={checkedValue} changed={this.handleChangeValue} />
                   }
-          body={(
-            <>
-              <FormItem fieldName="Сумма">
-                <PromoInput transactionType={checkedValue} defaultValue={sumValue} changed={this.handleSumValueChanged} />
-              </FormItem>
-              {checkedValue === TRANSACTION_TYPES.CREDIT && (
+        body={(
+          <>
+            <FormItem fieldName="Сумма">
+              <PromoInput transactionType={checkedValue} defaultValue={sumValue} changed={this.handleSumValueChanged} />
+            </FormItem>
+            {checkedValue === TRANSACTION_TYPES.CREDIT && (
               <FormItem fieldName="Категория">
                 <Dropdown items={categoryItems} defaultSelectedItem={defaultCategoryItem} clicked={this.handleCategoryDropdownClicked} />
               </FormItem>
-              ) }
-              <FormRow>
-                <FormItem fieldName="Счет">
-                  <Dropdown items={accountItems} defaultSelectedItem={defaultAccountItem} clicked={this.handleAccountDropdownClicked} />
-                </FormItem>
-                <FormItem fieldName="Дата">
-                  <DatePicker selectedDate={selectedDate} selected={this.handleDateSelected} />
-                </FormItem>
-              </FormRow>
-            </>
+            ) }
+            <FormRow>
+              <FormItem fieldName="Счет">
+                <Dropdown items={accountItems} defaultSelectedItem={defaultAccountItem} clicked={this.handleAccountDropdownClicked} />
+              </FormItem>
+              <FormItem fieldName="Дата">
+                <DatePicker selectedDate={selectedDate} selected={this.handleDateSelected} />
+              </FormItem>
+            </FormRow>
+          </>
           )}
-          controls={
-            <Button type="primary" size="medium" clicked={this.handleSubmitButtonClicked}>Записать</Button>
+        controls={
+          <Button type="primary" size="medium" clicked={this.handleSubmitButtonClicked}>Записать</Button>
           }
-        />
-      )
+      />
     );
   }
 }
 
 TransactionModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
+  hideModal: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(CategoryType).isRequired,
   accounts: PropTypes.arrayOf(AccountType).isRequired,
-  createTransaction: PropTypes.func.isRequired,
+  saveTransaction: PropTypes.func.isRequired,
   transactionToUpdate: TransactionType,
 };
 

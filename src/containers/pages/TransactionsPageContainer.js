@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import TransactionsPage from '../../components/pages/transactionsPage';
+import { showModal } from '../../reducers/modal/actions';
 import {
   deleteTransaction, createTransaction, updateTransaction, fetchTransactionsIfNeeded,
 } from '../../reducers/transactions/actions';
@@ -17,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteTransaction: (transaction) => dispatch(deleteTransaction(transaction)),
   createTransaction: (transaction) => dispatch(createTransaction(transaction)),
   updateTransaction: (transaction) => dispatch(updateTransaction(transaction)),
+  showModal: (modalType, modalProps) => dispatch(showModal(modalType, modalProps)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsPage);
