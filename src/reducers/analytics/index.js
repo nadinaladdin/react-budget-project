@@ -3,6 +3,7 @@ import { analyticsActionTypes } from './actions';
 const DEFAULT_STATE = {
   balance: 0,
   monthlyExpenses: {},
+  accountsDebits: [],
   loading: false,
   error: null,
 };
@@ -29,6 +30,11 @@ export default (state = DEFAULT_STATE, action) => {
       return {
         ...state,
         monthlyExpenses: action.payload,
+      };
+    case analyticsActionTypes.SET_ACCOUNTS_DEBITS:
+      return {
+        ...state,
+        accountsDebits: action.payload,
       };
     default:
       return state;

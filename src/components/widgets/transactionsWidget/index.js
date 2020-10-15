@@ -7,7 +7,7 @@ import { TransactionType } from '../../propTypes';
 import Loader from '../../shared/loader';
 
 const TransactionsWidget = ({
-  transactions, deleteTransaction, loadingTransactions, error, showModal,
+  transactions, deleteTransaction, loadingTransactions, showModal,
 }) => {
   const transactionBody = transactions && transactions.length > 0
     ? <TransactionsList transactions={transactions} deleteButtonClicked={deleteTransaction} showModal={showModal} />

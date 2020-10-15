@@ -51,3 +51,21 @@ export const fetchMonthlyExpenses = (year, month) => async (dispatch) => {
     dispatch(setLoading(false));
   }
 };
+
+export const setAccountDebits = (accountsDebits) => ({
+  type: analyticsActionTypes.SET_ACCOUNTS_DEBITS,
+  payload: accountsDebits,
+});
+
+export const fetchAccountsDebits = (year, month) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await api.get(`analytics/accounts-debits/${year}/${month}`);
+    console.log(response.data);
+    dispatch(setAccountDebits(response.data));
+  } catch (error) {
+    dispatch(setError(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};

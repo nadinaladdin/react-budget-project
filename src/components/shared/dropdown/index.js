@@ -33,7 +33,7 @@ export default class Dropdown extends Component {
     const dropdownItems = items.map(
       (item) => (
         <li
-          key={item}
+          key={`${item.title}-${item.colour}`}
           className={`dropdown__list-item ${selectedItem === item ? 'dropdown__list-item_active' : ''}`}
           onClick={() => this.handleItemClick(item)}
         >

@@ -1,5 +1,4 @@
-import PropTypes, { string } from 'prop-types';
-import { TRANSACTION_TYPES, MESSAGE_STATES } from '../utils/constants';
+import PropTypes from 'prop-types';
 
 export const CategoryType = PropTypes.shape({
   name: PropTypes.string.isRequired,
@@ -12,7 +11,7 @@ export const AccountType = PropTypes.shape({
 });
 
 export const TransactionType = PropTypes.shape({
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.string.isRequired,
   sum: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
@@ -58,4 +57,9 @@ export const ChartDataType = PropTypes.shape({
 export const MonthlyExpensesType = PropTypes.shape({
   total: PropTypes.number,
   expenses: PropTypes.arrayOf(ChartDataType),
+});
+
+export const AccountsDebitsType = PropTypes.shape({
+  account: AccountType,
+  transactions: PropTypes.arrayOf(TransactionType),
 });

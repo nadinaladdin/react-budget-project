@@ -26,7 +26,9 @@ const CategoriesList = ({
   ));
   return (
     <table className="table">
-      {categoriesRows}
+      <tbody>
+        {categoriesRows}
+      </tbody>
     </table>
   );
 };

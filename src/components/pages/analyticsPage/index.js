@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import PropsTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import MonthlyExpensesWidget from '../../widgets/analyticsWidgets/MonthlyExpensesWidget';
 import AccountsDebitsWidget from '../../widgets/analyticsWidgets/AccountsDebitsWidget';
 import BalanceWidget from '../../widgets/analyticsWidgets/BalanceWidget';
-import { MonthlyExpensesType } from '../../propTypes';
+import { AccountsDebitsType, MonthlyExpensesType } from '../../propTypes';
 
 export default class AnalyticsPage extends Component {
   componentDidMount() {
-    const { fetchBalance, fetchMonthlyExpenses } = this.props;
+    const { fetchBalance, fetchMonthlyExpenses, fetchAccountsDebits } = this.props;
     const date = new Date();
     fetchBalance();
     fetchMonthlyExpenses(date.getFullYear(), date.getMonth());
+    fetchAccountsDebits(date.getFullYear(), date.getMonth());
   }
 
   render() {
-    const { balance, monthlyExpenses, fetchMonthlyExpenses } = this.props;
+    const {
+      balance, monthlyExpenses, fetchMonthlyExpenses, accountsDebits, fetchAccountsDebits,
+    } = this.props;
     return (
       <>
         <div className="content__column">
@@ -23,7 +26,7 @@ export default class AnalyticsPage extends Component {
         </div>
 
         <div className="content__column">
-          <AccountsDebitsWidget />
+          <AccountsDebitsWidget accountsDebits={accountsDebits} changeMonth={fetchAccountsDebits} />
         </div>
       </>
     );
@@ -31,8 +34,10 @@ export default class AnalyticsPage extends Component {
 }
 
 AnalyticsPage.propTypes = {
-  balance: PropsTypes.number.isRequired,
-  fetchBalance: PropsTypes.func.isRequired,
-  fetchMonthlyExpenses: PropsTypes.func.isRequired,
+  balance: PropTypes.number.isRequired,
+  fetchBalance: PropTypes.func.isRequired,
+  fetchMonthlyExpenses: PropTypes.func.isRequired,
   monthlyExpenses: MonthlyExpensesType.isRequired,
+  fetchAccountsDebits: PropTypes.func.isRequired,
+  accountsDebits: PropTypes.arrayOf(AccountsDebitsType).isRequired,
 };

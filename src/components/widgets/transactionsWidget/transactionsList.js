@@ -34,7 +34,9 @@ const TransactionsList = ({ transactions, deleteButtonClicked, showModal }) => {
   ));
   return (
     <table className="table">
-      {transactionsRows}
+      <tbody>
+        {transactionsRows}
+      </tbody>
     </table>
   );
 };

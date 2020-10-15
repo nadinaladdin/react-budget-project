@@ -31,7 +31,9 @@ const AccountsList = ({
   ));
   return (
     <table className="table">
-      {tableRows}
+      <tbody>
+        {tableRows}
+      </tbody>
     </table>
   );
 };

@@ -5,6 +5,7 @@ import { MONTH_NAME } from '../../../utils/constants';
 import sprite from '../../../assets/sprite.svg';
 import { OverflowMenu, OverflowMenuItem } from '../../shared/overflowMenu';
 import AccountDebitsTable from './AccountDebitsTable';
+import { AccountsDebitsType } from '../../propTypes';
 
 const VISIBLE_AMOUNT_OF_MONTHS = 3;
 
@@ -18,8 +19,17 @@ export default class AccountsDebitsWidget extends Component {
 
   render() {
     const { selectedMonth } = this.state;
-    const { changeMonth } = this.props;
+    const { changeMonth, accountsDebits } = this.props;
     const overflowMenuItems = [];
+
+    const debitsTables = accountsDebits
+      ? accountsDebits.map((accountDebits) => (
+        <div key={accountDebits.account.name}>
+          <AccountDebitsTable debits={accountDebits.transactions} account={accountDebits.account} />
+          <div className="accounts-debits-divider" />
+        </div>
+      ))
+      : null;
 
     for (let i = 0; i < VISIBLE_AMOUNT_OF_MONTHS; i += 1) {
       const { month } = DateTime.local().minus({ months: i + 1 });
@@ -39,10 +49,7 @@ export default class AccountsDebitsWidget extends Component {
         </div>
         <div className="card__divider" />
         <div className="card__body">
-          <AccountDebitsTable />
-          <div className="accounts-debits-divider" />
-          <AccountDebitsTable />
-          <div className="accounts-debits-divider" />
+          {debitsTables}
         </div>
       </div>
     );
@@ -51,4 +58,5 @@ export default class AccountsDebitsWidget extends Component {
 
 AccountsDebitsWidget.propTypes = {
   changeMonth: PropTypes.func.isRequired,
+  accountsDebits: PropTypes.arrayOf(AccountsDebitsType).isRequired,
 };
