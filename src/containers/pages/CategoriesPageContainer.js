@@ -3,6 +3,7 @@ import CategoriesPage from '../../components/pages/categoriesPage';
 import {
   fetchCategories, deleteCategory, createCategory, updateCategory,
 } from '../../reducers/categories/actions';
+import { showModal } from '../../reducers/modal/actions';
 
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
@@ -15,6 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
   deleteCategory: (category) => dispatch(deleteCategory(category)),
   createCategory: (category) => dispatch(createCategory(category)),
   updateCategory: (category) => dispatch(updateCategory(category)),
+  showModal: (modalType, modalProps) => dispatch(showModal(modalType, modalProps)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage);

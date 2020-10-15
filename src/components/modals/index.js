@@ -6,7 +6,6 @@ import UpdateTransactionModalContainer from '../../containers/modals/updateTrans
 const MODAL_COMPONENTS = {
   CREATE_TRANSACTION: CreateTransactionModalContainer,
   UPDATE_TRANSACTION: UpdateTransactionModalContainer,
-  /* other modals */
 };
 
 const ModalRoot = ({ modalType, modalProps }) => {

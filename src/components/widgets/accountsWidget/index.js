@@ -7,6 +7,7 @@ import CreditCard from '../../../assets/CreditCard.svg';
 import { AccountType } from '../../propTypes';
 import Loader from '../../shared/loader';
 import Banner from '../../shared/banner';
+import { TRANSACTION_TYPES } from '../../../utils/constants';
 
 export default class AccountsWidget extends Component {
   constructor(props) {
@@ -47,13 +48,13 @@ export default class AccountsWidget extends Component {
 
     render() {
       const {
-        accounts, deleteAccount, updateAccount, loading, error,
+        accounts, deleteAccount, updateAccount, loading, error, showModal,
       } = this.props;
 
       const { isButtonDisabled, accountBannerIsHide } = this.state;
 
       const accountBody = accounts && accounts.length > 0
-        ? <AccountsList accounts={accounts} deleteButtonClicked={deleteAccount} updateButtonClicked={updateAccount} />
+        ? <AccountsList accounts={accounts} deleteButtonClicked={deleteAccount} updateButtonClicked={updateAccount} showModal={showModal} />
         : (
           <div className="empty-alert">
             <img src={CreditCard} alt="credit-card-icon" className="empty-alert__icon" />
@@ -72,7 +73,13 @@ export default class AccountsWidget extends Component {
             title="Осталось пополнить счёт 🎉"
             text="Запишите текущий баланс счёта, чтобы было, что тратить. Потом можно будет внести первые расходы."
           >
-            <Button size="small" type="primary">Пополнить счет</Button>
+            <Button
+              size="small"
+              type="primary"
+              clicked={() => showModal('CREATE_TRANSACTION', { defaultTransaction: { account: accounts[0], type: TRANSACTION_TYPES.DEBIT } })}
+            >
+              Пополнить счет
+            </Button>
           </Banner>
         )
         : null;
@@ -112,4 +119,5 @@ AccountsWidget.propTypes = {
   updateAccount: PropTypes.func.isRequired,
   error: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
+  showModal: PropTypes.func.isRequired,
 };

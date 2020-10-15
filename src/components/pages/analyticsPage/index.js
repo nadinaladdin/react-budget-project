@@ -14,12 +14,12 @@ export default class AnalyticsPage extends Component {
   }
 
   render() {
-    const { balance, monthlyExpenses } = this.props;
+    const { balance, monthlyExpenses, fetchMonthlyExpenses } = this.props;
     return (
       <>
         <div className="content__column">
           <BalanceWidget balance={balance} />
-          <MonthlyExpensesWidget monthlyExpenses={monthlyExpenses} />
+          <MonthlyExpensesWidget monthlyExpenses={monthlyExpenses} changeMonth={fetchMonthlyExpenses} />
         </div>
 
         <div className="content__column">

@@ -11,7 +11,7 @@ class CategoriesPage extends Component {
 
   render() {
     const {
-      categories, error, loading, deleteCategory, createCategory, updateCategory,
+      categories, error, loading, deleteCategory, createCategory, updateCategory, showModal,
     } = this.props;
     return (
       <div className="content__column">
@@ -22,6 +22,7 @@ class CategoriesPage extends Component {
           deleteCategory={deleteCategory}
           createCategory={createCategory}
           updateCategory={updateCategory}
+          showModal={showModal}
         />
       </div>
     );
@@ -36,6 +37,7 @@ CategoriesPage.propTypes = {
   deleteCategory: PropTypes.func.isRequired,
   createCategory: PropTypes.func.isRequired,
   updateCategory: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default CategoriesPage;

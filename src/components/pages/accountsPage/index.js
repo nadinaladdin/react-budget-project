@@ -11,7 +11,7 @@ class AccountsPage extends React.Component {
 
   render() {
     const {
-      accounts, createAccount, error, deleteAccount, updateAccount, loading,
+      accounts, createAccount, error, deleteAccount, updateAccount, loading, showModal,
     } = this.props;
     return (
       <div className="content__column">
@@ -22,6 +22,7 @@ class AccountsPage extends React.Component {
           loading={loading}
           updateAccount={updateAccount}
           deleteAccount={deleteAccount}
+          showModal={showModal}
         />
       </div>
     );
@@ -36,6 +37,7 @@ AccountsPage.propTypes = {
   deleteAccount: PropTypes.func.isRequired,
   createAccount: PropTypes.func.isRequired,
   updateAccount: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default AccountsPage;

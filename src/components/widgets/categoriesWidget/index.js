@@ -53,13 +53,13 @@ export default class CategoriesWidget extends Component {
 
   render() {
     const {
-      categories, deleteCategory, updateCategory, loading, error,
+      categories, deleteCategory, updateCategory, loading, error, showModal,
     } = this.props;
 
     const { selectedColourItem, isButtonDisabled } = this.state;
 
     const categoryBody = categories && categories.length > 0
-      ? <CategoriesList categories={categories} deleteButtonClicked={deleteCategory} updateButtonClicked={updateCategory} />
+      ? <CategoriesList categories={categories} deleteButtonClicked={deleteCategory} updateButtonClicked={updateCategory} showModal={showModal} />
       : (
         <div className="empty-alert">
           <img src={ShoppingBag} alt="credit-card-icon" className="empty-alert__icon" />
@@ -98,4 +98,5 @@ CategoriesWidget.propTypes = {
   updateCategory: PropTypes.func.isRequired,
   error: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool.isRequired,
 };

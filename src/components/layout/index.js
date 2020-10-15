@@ -12,7 +12,7 @@ export default class Layout extends Component {
 
   handleModalVisibility = () => {
     const { showModal } = this.props;
-    showModal('CREATE_TRANSACTION', {});
+    showModal('CREATE_TRANSACTION', { defaultTransaction: {} });
   }
 
   render() {

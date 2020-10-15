@@ -6,7 +6,6 @@ import { createTransaction } from '../../reducers/transactions/actions';
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   accounts: state.accounts.accounts,
-  transactionToUpdate: null,
 });
 
 const mapDispatchToProps = (dispatch) => ({

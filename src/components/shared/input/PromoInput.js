@@ -32,7 +32,7 @@ const PromoInput = ({ transactionType, changed, defaultValue }) => {
 };
 
 PromoInput.propTypes = {
-  transactionType: PropTypes.oneOf(TRANSACTION_TYPES),
+  transactionType: PropTypes.string,
   defaultValue: PropTypes.string,
   changed: PropTypes.func.isRequired,
 };

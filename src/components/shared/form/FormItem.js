@@ -28,7 +28,7 @@ const FormItem = ({
 FormItem.propTypes = {
   fieldName: PropTypes.string.isRequired,
   message: PropTypes.string,
-  messageType: PropTypes.oneOf(MESSAGE),
+  messageType: PropTypes.string,
   children: PropTypes.node,
 };
 

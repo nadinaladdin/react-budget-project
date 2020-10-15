@@ -38,6 +38,7 @@ const Tabs = ({
     <TabElement
       name={tab.name}
       value={tab.value}
+      key={tab.value}
       groupName={groupName}
       checked={checkedValue === tab.value}
       changed={changed}

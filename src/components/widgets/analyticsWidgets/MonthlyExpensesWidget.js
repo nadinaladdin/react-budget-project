@@ -27,7 +27,7 @@ export default class MonthlyExpensesWidget extends Component {
 
     for (let i = 0; i < VISIBLE_AMOUNT_OF_MONTHS; i += 1) {
       const { month } = DateTime.local().minus({ months: i + 1 });
-      overflowMenuItems.push(<OverflowMenuItem title={MONTH_NAME[month]} onClick={() => changeMonth(month)} />);
+      overflowMenuItems.push(<OverflowMenuItem title={MONTH_NAME[month]} key={MONTH_NAME[month]} clicked={() => changeMonth(month)} />);
     }
 
     return (

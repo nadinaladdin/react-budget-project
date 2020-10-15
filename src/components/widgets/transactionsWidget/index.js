@@ -29,7 +29,7 @@ const TransactionsWidget = ({
             Транзакции
           </div>
           <div className="card__controls">
-            <Button type="outline" size="small" clicked={() => showModal('CREATE_TRANSACTION', {})}>
+            <Button type="outline" size="small" clicked={() => showModal('CREATE_TRANSACTION', { defaultTransaction: {} })}>
               Добавить транзакцию
             </Button>
           </div>

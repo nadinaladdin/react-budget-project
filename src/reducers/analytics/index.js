@@ -2,7 +2,7 @@ import { analyticsActionTypes } from './actions';
 
 const DEFAULT_STATE = {
   balance: 0,
-  monthlyExpenses: [],
+  monthlyExpenses: {},
   loading: false,
   error: null,
 };

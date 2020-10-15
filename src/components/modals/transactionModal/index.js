@@ -19,19 +19,19 @@ const tabs = [
 export default class TransactionModal extends Component {
   constructor(props) {
     super(props);
-    const { transactionToUpdate } = this.props;
+    const { defaultTransaction } = this.props;
     this.state = {
-      checkedValue: transactionToUpdate ? transactionToUpdate.type : TRANSACTION_TYPES.DEBIT,
-      selectedCategoryId: transactionToUpdate ? transactionToUpdate.category.id : null,
-      selectedAccountId: transactionToUpdate ? transactionToUpdate.account.id : null,
-      selectedDate: transactionToUpdate ? transactionToUpdate.date : new Date(),
-      sumValue: transactionToUpdate ? `${transactionToUpdate.sum}` : null,
+      selectedType: defaultTransaction.type ? defaultTransaction.type : TRANSACTION_TYPES.CREDIT,
+      selectedCategoryId: defaultTransaction.category ? defaultTransaction.category.id : null,
+      selectedAccountId: defaultTransaction.account ? defaultTransaction.account.id : null,
+      selectedDate: defaultTransaction.date ? defaultTransaction.date : new Date(),
+      sumValue: defaultTransaction.sum ? `${defaultTransaction.sum}` : null,
     };
   }
 
   handleChangeValue = (event) => {
     const { value } = event.target;
-    return this.setState({ checkedValue: value });
+    return this.setState({ selectedType: value });
   }
 
   handleCategoryDropdownClicked = (value) => this.setState({ selectedCategoryId: value.id })
@@ -43,16 +43,16 @@ export default class TransactionModal extends Component {
   handleDateSelected = (value) => this.setState({ selectedDate: value })
 
   handleSubmitButtonClicked = () => {
-    const { saveTransaction, hideModal, transactionToUpdate } = this.props;
+    const { saveTransaction, hideModal, defaultTransaction } = this.props;
     const {
-      selectedDate, sumValue, selectedCategoryId, selectedAccountId, checkedValue,
+      selectedDate, sumValue, selectedCategoryId, selectedAccountId, selectedType,
     } = this.state;
 
-    const categoryId = checkedValue === TRANSACTION_TYPES.DEBIT ? null : selectedCategoryId;
+    const categoryId = selectedType === TRANSACTION_TYPES.DEBIT ? null : selectedCategoryId;
 
     saveTransaction({
-      ...transactionToUpdate,
-      type: checkedValue,
+      ...defaultTransaction,
+      type: selectedType,
       date: selectedDate,
       sum: sumValue.replace(/[^\d]/g, ''),
       category: categoryId,
@@ -70,7 +70,7 @@ export default class TransactionModal extends Component {
   render() {
     const { categories, accounts } = this.props;
     const {
-      checkedValue, selectedCategoryId, selectedAccountId, sumValue, selectedDate,
+      selectedType, selectedCategoryId, selectedAccountId, sumValue, selectedDate,
     } = this.state;
     const categoryItems = categories.map((category) => ({
       id: category.id,
@@ -90,14 +90,14 @@ export default class TransactionModal extends Component {
       <Modal
         close={this.handleCloseModal}
         header={
-          <Tabs tabs={tabs} checkedValue={checkedValue} changed={this.handleChangeValue} />
+          <Tabs tabs={tabs} checkedValue={selectedType} changed={this.handleChangeValue} />
                   }
         body={(
           <>
             <FormItem fieldName="Сумма">
-              <PromoInput transactionType={checkedValue} defaultValue={sumValue} changed={this.handleSumValueChanged} />
+              <PromoInput transactionType={selectedType} defaultValue={sumValue} changed={this.handleSumValueChanged} />
             </FormItem>
-            {checkedValue === TRANSACTION_TYPES.CREDIT && (
+            {selectedType === TRANSACTION_TYPES.CREDIT && (
               <FormItem fieldName="Категория">
                 <Dropdown items={categoryItems} defaultSelectedItem={defaultCategoryItem} clicked={this.handleCategoryDropdownClicked} />
               </FormItem>
@@ -125,9 +125,9 @@ TransactionModal.propTypes = {
   categories: PropTypes.arrayOf(CategoryType).isRequired,
   accounts: PropTypes.arrayOf(AccountType).isRequired,
   saveTransaction: PropTypes.func.isRequired,
-  transactionToUpdate: TransactionType,
+  defaultTransaction: TransactionType,
 };
 
 TransactionModal.defaultProps = {
-  transactionToUpdate: null,
+  defaultTransaction: null,
 };

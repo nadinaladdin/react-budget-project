@@ -14,7 +14,7 @@ export const AccountType = PropTypes.shape({
 export const TransactionType = PropTypes.shape({
   date: PropTypes.instanceOf(Date).isRequired,
   sum: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(TRANSACTION_TYPES).isRequired,
+  type: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   account: PropTypes.string.isRequired,
 });
@@ -46,7 +46,7 @@ export const TabType = PropTypes.shape({
 export const MessageType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  messageState: PropTypes.oneOf(MESSAGE_STATES),
+  messageState: PropTypes.string,
 });
 
 export const ChartDataType = PropTypes.shape({
@@ -56,6 +56,6 @@ export const ChartDataType = PropTypes.shape({
 });
 
 export const MonthlyExpensesType = PropTypes.shape({
-  total: PropTypes.number.isRequired,
+  total: PropTypes.number,
   expenses: PropTypes.arrayOf(ChartDataType),
 });
