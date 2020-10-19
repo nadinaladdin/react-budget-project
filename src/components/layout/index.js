@@ -4,12 +4,6 @@ import Navigation from './navigation';
 import FloatingButton from '../shared/button/FloatingButton';
 
 export default class Layout extends Component {
-  componentDidMount() {
-    const { fetchCategories, fetchAccounts } = this.props;
-    fetchAccounts();
-    fetchCategories();
-  }
-
   handleModalVisibility = () => {
     const { showModal } = this.props;
     showModal('CREATE_TRANSACTION', { defaultTransaction: {} });
@@ -39,6 +33,4 @@ export default class Layout extends Component {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   showModal: PropTypes.func.isRequired,
-  fetchCategories: PropTypes.func.isRequired,
-  fetchAccounts: PropTypes.func.isRequired,
 };

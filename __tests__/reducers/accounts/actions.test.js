@@ -34,7 +34,6 @@ describe('fetch accounts action creator', () => {
         // await store.dispatch(fetchAccounts());
         // const newState = store.getState();
         // expect(newState.accounts).toBe(accounts);
-        console.log(store);
         return store.dispatch(fetchAccounts())
             .then(() => {
                const newState = store.getState();

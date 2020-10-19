@@ -181,6 +181,10 @@ export default class DatePicker extends Component {
 }
 
 DatePicker.propTypes = {
-  defaultDate: PropTypes.instanceOf(Date).isRequired,
+  defaultDate: PropTypes.instanceOf(Date),
   selected: PropTypes.func.isRequired,
+};
+
+DatePicker.defaultProps = {
+  defaultDate: null,
 };

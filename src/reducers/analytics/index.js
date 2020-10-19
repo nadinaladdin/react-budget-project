@@ -5,7 +5,7 @@ const DEFAULT_STATE = {
   monthlyExpenses: {},
   accountsDebits: [],
   loading: false,
-  error: null,
+  error: false,
 };
 
 export default (state = DEFAULT_STATE, action) => {

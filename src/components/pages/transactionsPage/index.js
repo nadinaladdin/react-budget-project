@@ -29,11 +29,16 @@ class TransactionsPage extends Component {
 
 TransactionsPage.propTypes = {
   fetchTransactions: PropTypes.func.isRequired,
-  transactions: PropTypes.arrayOf(TransactionType).isRequired,
-  error: PropTypes.string.isRequired,
+  transactions: PropTypes.arrayOf(TransactionType),
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
+};
+
+TransactionsPage.defaultProps = {
+  transactions: null,
+  error: null,
 };
 
 export default TransactionsPage;

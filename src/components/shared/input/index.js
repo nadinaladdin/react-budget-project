@@ -33,7 +33,7 @@ Input.propTypes = {
   changed: PropTypes.func.isRequired,
   defaultValue: PropTypes.string,
   value: PropTypes.string,
-  maskOptions: PropTypes.objectOf(MaskOptionsType),
+  maskOptions: PropTypes.func,
 };
 
 Input.defaultProps = {

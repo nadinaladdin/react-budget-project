@@ -38,6 +38,14 @@ export const fetchCategories = () => async (dispatch) => {
   }
 };
 
+export const fetchCategoriesIfNeeded = () => async (dispatch, getState) => {
+  const state = getState();
+  if (state.categories.categories) {
+    return Promise.resolve();
+  }
+  return dispatch(fetchCategories());
+};
+
 export const createCategory = (category) => async (dispatch) => {
   try {
     dispatch(setLoading(true));

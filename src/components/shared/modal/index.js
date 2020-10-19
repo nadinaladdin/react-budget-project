@@ -26,6 +26,8 @@ export default class Modal extends Component {
           transitionName="fade"
           transitionAppear
           transitionAppearTimeout={500}
+          transitionLeaveTimeout={300}
+          transitionEnterTimeout={500}
         >
           <div className="modal__container" ref={this.wrapperRef} key="modal">
             <div className="modal__header">

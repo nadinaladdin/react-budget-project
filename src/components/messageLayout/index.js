@@ -7,13 +7,12 @@ import { MessageType } from '../propTypes';
 const MessageLayout = ({ messages, deleteMessage }) => {
   const messageItems = messages && messages.length > 0
     ? messages.map((message) => (
-      <div className="message-layout__item">
+      <div className="message-layout__item" key={message.id}>
         <Snackbar
           snackbarText={message.text}
           messageState={message.messageState}
           close={deleteMessage}
           id={message.id}
-          key={message.id}
         />
       </div>
     ))

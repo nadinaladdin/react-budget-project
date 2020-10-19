@@ -29,6 +29,12 @@ export default class TransactionModal extends Component {
     };
   }
 
+  componentDidMount() {
+    const { fetchCategories, fetchAccounts } = this.props;
+    fetchCategories();
+    fetchAccounts();
+  }
+
   handleChangeValue = (event) => {
     const { value } = event.target;
     return this.setState({ selectedType: value });
@@ -72,16 +78,20 @@ export default class TransactionModal extends Component {
     const {
       selectedType, selectedCategoryId, selectedAccountId, sumValue, selectedDate,
     } = this.state;
-    const categoryItems = categories.map((category) => ({
-      id: category.id,
-      title: category.name,
-      colour: category.colour,
-    }));
-    const accountItems = accounts.map((account) => ({
-      id: account.id,
-      title: account.name,
-      colour: null,
-    }));
+    const categoryItems = categories
+      ? categories.map((category) => ({
+        id: category.id,
+        title: category.name,
+        colour: category.colour,
+      }))
+      : [];
+    const accountItems = accounts
+      ? accounts.map((account) => ({
+        id: account.id,
+        title: account.name,
+        colour: null,
+      }))
+      : [];
 
     const defaultCategoryItem = selectedCategoryId ? categoryItems.find((item) => item.id === selectedCategoryId) : null;
     const defaultAccountItem = selectedAccountId ? accountItems.find((item) => item.id === selectedAccountId) : null;
@@ -122,12 +132,16 @@ export default class TransactionModal extends Component {
 
 TransactionModal.propTypes = {
   hideModal: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(CategoryType).isRequired,
-  accounts: PropTypes.arrayOf(AccountType).isRequired,
+  categories: PropTypes.arrayOf(CategoryType),
+  accounts: PropTypes.arrayOf(AccountType),
   saveTransaction: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  fetchAccounts: PropTypes.func.isRequired,
   defaultTransaction: TransactionType,
 };
 
 TransactionModal.defaultProps = {
   defaultTransaction: null,
+  accounts: null,
+  categories: null,
 };

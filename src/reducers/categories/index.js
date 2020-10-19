@@ -1,7 +1,7 @@
 import { categoriesActionTypes } from './actions';
 
 const DEFAULT_STATE = {
-  categories: [],
+  categories: null,
   loading: false,
   error: null,
 };

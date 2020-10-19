@@ -11,11 +11,11 @@ export const AccountType = PropTypes.shape({
 });
 
 export const TransactionType = PropTypes.shape({
-  date: PropTypes.string.isRequired,
-  sum: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  account: PropTypes.string.isRequired,
+  date: PropTypes.string,
+  sum: PropTypes.number,
+  type: PropTypes.string,
+  category: PropTypes.string,
+  account: PropTypes.string,
 });
 
 export const DropdownItemsType = PropTypes.shape({

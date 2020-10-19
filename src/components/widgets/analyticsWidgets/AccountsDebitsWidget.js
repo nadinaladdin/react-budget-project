@@ -22,7 +22,7 @@ export default class AccountsDebitsWidget extends Component {
     const { changeMonth, accountsDebits } = this.props;
     const overflowMenuItems = [];
 
-    const debitsTables = accountsDebits
+    const debitsTables = accountsDebits.account
       ? accountsDebits.map((accountDebits) => (
         <div key={accountDebits.account.name}>
           <AccountDebitsTable debits={accountDebits.transactions} account={accountDebits.account} />

@@ -66,7 +66,7 @@ export default class AccountsWidget extends Component {
           </div>
         );
 
-      const accountBanner = !accountBannerIsHide && accounts.length === 1 && accounts[0].sum === 0
+      const accountBanner = !accountBannerIsHide && accounts && accounts.length === 1 && accounts[0].sum === 0
         ? (
           <Banner
             close={this.handleAccountBannerClosed}
@@ -113,11 +113,16 @@ export default class AccountsWidget extends Component {
 }
 
 AccountsWidget.propTypes = {
-  accounts: PropTypes.arrayOf(AccountType).isRequired,
+  accounts: PropTypes.arrayOf(AccountType),
   deleteAccount: PropTypes.func.isRequired,
   createAccount: PropTypes.func.isRequired,
   updateAccount: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   showModal: PropTypes.func.isRequired,
+};
+
+AccountsWidget.defaultProps = {
+  accounts: null,
+  error: null,
 };

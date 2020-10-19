@@ -31,13 +31,18 @@ class CategoriesPage extends Component {
 
 CategoriesPage.propTypes = {
   fetchCategories: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(CategoryType).isRequired,
-  error: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(CategoryType),
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   deleteCategory: PropTypes.func.isRequired,
   createCategory: PropTypes.func.isRequired,
   updateCategory: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
+};
+
+CategoriesPage.defaultProps = {
+  error: null,
+  categories: null,
 };
 
 export default CategoriesPage;

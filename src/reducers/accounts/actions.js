@@ -38,6 +38,14 @@ export const fetchAccounts = () => async (dispatch) => {
   }
 };
 
+export const fetchAccountsIfNeeded = () => async (dispatch, getState) => {
+  const state = getState();
+  if (state.accounts.accounts) {
+    return Promise.resolve();
+  }
+  return dispatch(fetchAccounts());
+};
+
 export const getAccounts = () => async (dispatch, getState) => {
   let state = getState();
   if (state.accounts.accounts) {

@@ -92,11 +92,16 @@ export default class CategoriesWidget extends Component {
 }
 
 CategoriesWidget.propTypes = {
-  categories: PropTypes.arrayOf(CategoryType).isRequired,
+  categories: PropTypes.arrayOf(CategoryType),
   deleteCategory: PropTypes.func.isRequired,
   createCategory: PropTypes.func.isRequired,
   updateCategory: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  showModal: PropTypes.bool.isRequired,
+  showModal: PropTypes.func.isRequired,
+};
+
+CategoriesWidget.defaultProps = {
+  error: null,
+  categories: null,
 };

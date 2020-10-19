@@ -31,13 +31,18 @@ class AccountsPage extends React.Component {
 
 AccountsPage.propTypes = {
   fetchAccounts: PropTypes.func.isRequired,
-  accounts: PropTypes.arrayOf(AccountType).isRequired,
-  error: PropTypes.string.isRequired,
+  accounts: PropTypes.arrayOf(AccountType),
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   createAccount: PropTypes.func.isRequired,
   updateAccount: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
+};
+
+AccountsPage.defaultProps = {
+  accounts: null,
+  error: null,
 };
 
 export default AccountsPage;

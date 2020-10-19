@@ -61,7 +61,6 @@ export const fetchAccountsDebits = (year, month) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await api.get(`analytics/accounts-debits/${year}/${month}`);
-    console.log(response.data);
     dispatch(setAccountDebits(response.data));
   } catch (error) {
     dispatch(setError(error));

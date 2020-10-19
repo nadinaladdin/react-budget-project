@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import CategoriesPage from '../../components/pages/categoriesPage';
 import {
-  fetchCategories, deleteCategory, createCategory, updateCategory,
+  deleteCategory, createCategory, updateCategory, fetchCategoriesIfNeeded,
 } from '../../reducers/categories/actions';
 import { showModal } from '../../reducers/modal/actions';
 
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCategories: () => dispatch(fetchCategories()),
+  fetchCategories: () => dispatch(fetchCategoriesIfNeeded()),
   deleteCategory: (category) => dispatch(deleteCategory(category)),
   createCategory: (category) => dispatch(createCategory(category)),
   updateCategory: (category) => dispatch(updateCategory(category)),

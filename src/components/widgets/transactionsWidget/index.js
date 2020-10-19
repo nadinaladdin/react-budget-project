@@ -7,7 +7,7 @@ import { TransactionType } from '../../propTypes';
 import Loader from '../../shared/loader';
 
 const TransactionsWidget = ({
-  transactions, deleteTransaction, loadingTransactions, showModal,
+  transactions, deleteTransaction, loadingTransactions, showModal, error,
 }) => {
   const transactionBody = transactions && transactions.length > 0
     ? <TransactionsList transactions={transactions} deleteButtonClicked={deleteTransaction} showModal={showModal} />
@@ -46,11 +46,16 @@ const TransactionsWidget = ({
 };
 
 TransactionsWidget.propTypes = {
-  transactions: PropTypes.arrayOf(TransactionType).isRequired,
+  transactions: PropTypes.arrayOf(TransactionType),
   loadingTransactions: PropTypes.bool.isRequired,
   deleteTransaction: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.string,
   showModal: PropTypes.func.isRequired,
+};
+
+TransactionsWidget.defaultProps = {
+  transactions: null,
+  error: null,
 };
 
 export default TransactionsWidget;
